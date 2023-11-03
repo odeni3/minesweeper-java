@@ -1,11 +1,15 @@
 package zminesweeper;
 
 public class Main {
+	
+	//método main
 
 	public static void main(String[] args) {
-		System.out.println("Hello, world!!!");
-		System.out.println("Jajá começamos o projeto.");
-		System.out.println("teste");
+		
+		Board tabMain =  new Board(7,7,7);
+		tabMain.startGame();
+		System.out.println(tabMain);
+
 	}
 
 }
