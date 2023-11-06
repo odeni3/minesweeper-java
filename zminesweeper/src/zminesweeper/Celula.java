@@ -11,19 +11,19 @@ public class Celula {
 	//definindo getters e setters
 	
 	public boolean getBomb() {
-		return hasBomb;
+		return this.hasBomb;
 	}
 	public void setBomb(boolean bomb) {
 		this.hasBomb = bomb;
 	}
 	public boolean getFlag() {
-		return hasFlag;
+		return this.hasBomb;
 	}
 	public void setFlag(boolean flag) {
 		this.hasFlag = flag;
 	}
 	public boolean getSelected() {
-		return selected;
+		return this.selected;
 	}
 	public void setSelected(boolean selected) {
 		this.selected = selected;
@@ -67,6 +67,7 @@ public class Celula {
 	
 	//método para printar as bombas e células
 	
+	//isso só foi usado para testar se as bombas realmente estavam funcionando, mas podemos deixar salvo para utilizar para mostrar as bombas no fim do jogo
 	@Override
 	public String toString() {
 		if (hasBomb == true) {

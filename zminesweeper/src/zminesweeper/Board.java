@@ -22,16 +22,9 @@ public class Board {
 	
 	//definindo método para inicializar o jogo
 	
-	public void startGame() {
-		square = new Celula[line][column];
-		
-		for (int i = 0; i < line; i++) {
-			for (int j = 0; j < column; j++) {
-				square[i][j] = new Celula();
-			}
-		}
-		addBombBoard();
-	}
+	//
+	
+
 	
 	//definindo método para adicionar bombas randomicamente
 	
@@ -48,6 +41,18 @@ public class Board {
 			}
 		}
 		
+	}
+	
+	
+	public void startGame() {
+		square = new Celula[line][column];
+		
+		for (int i = 0; i < line; i++) {
+			for (int j = 0; j < column; j++) {
+				square[i][j] = new Celula();
+			}
+		}
+		addBombBoard();
 	}
 	
 	//método para printar os quadradinhos
