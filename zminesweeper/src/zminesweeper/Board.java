@@ -1,6 +1,7 @@
 package zminesweeper;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Board {
 	
@@ -20,12 +21,6 @@ public class Board {
 		
 	}
 	
-	//definindo método para inicializar o jogo
-	
-	//
-	
-
-	
 	//definindo método para adicionar bombas randomicamente
 	
 	public void addBombBoard() {
@@ -43,6 +38,7 @@ public class Board {
 		
 	}
 	
+	//definindo método para inicializar jogo
 	
 	public void startGame() {
 		square = new Celula[line][column];
@@ -53,6 +49,14 @@ public class Board {
 			}
 		}
 		addBombBoard();
+	}
+	
+	//método para selecionar célula (NÃO ESTÁ COMPLETO)
+	
+	public void userSelect(int selectedLine, int selectedColumn) {
+		square[selectedLine-1][selectedColumn-1] = new Celula();
+		square[selectedLine-1][selectedColumn-1].selecting();
+
 	}
 	
 	//método para printar os quadradinhos

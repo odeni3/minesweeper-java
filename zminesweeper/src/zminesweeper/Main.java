@@ -1,14 +1,37 @@
 package zminesweeper;
 
+import java.util.Scanner;
+
 public class Main {
 	
 	//método main
 
 	public static void main(String[] args) {
 		
-		Board tabMain =  new Board(7,7,7);
+		Scanner sc = new Scanner(System.in);
+		
+		Board tabMain =  new Board(7,7,48);
 		tabMain.startGame();
 		System.out.println(tabMain);
+		
+		System.out.println("Digite a linha:");
+		int i = sc.nextInt();
+		System.out.println("Digite a coluna:");
+		int j = sc.nextInt();
+		
+		tabMain.userSelect(i,j);
+		
+		while (true) {
+			System.out.println(tabMain);
+			System.out.println("Digite a linha:");
+			i = sc.nextInt();
+			System.out.println("Digite a coluna:");
+			j = sc.nextInt();
+			tabMain.userSelect(i,j);
+
+		}
+
+		
 
 	}
 
