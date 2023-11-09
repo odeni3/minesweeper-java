@@ -51,11 +51,24 @@ public class Board {
 		addBombBoard();
 	}
 	
+	
+	/*public void userFlagMode(String mode) {
+		boolean boolMode;
+		boolMode = Boolean.getBoolean(mode);
+		if( mode == "TRUE" ) {
+			boolMode.setFlagMode(true);
+		}
+			
+	}
+	*/
+	
+	
 	//método para selecionar célula (NÃO ESTÁ COMPLETO)
 	
+	
 	public void userSelect(int selectedLine, int selectedColumn) {
-		square[selectedLine-1][selectedColumn-1] = new Celula();
-		square[selectedLine-1][selectedColumn-1].selecting();
+		square[selectedLine][selectedColumn].selecting();
+
 
 	}
 	

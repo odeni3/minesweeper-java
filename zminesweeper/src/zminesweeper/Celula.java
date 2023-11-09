@@ -7,8 +7,10 @@ public class Celula {
 	private boolean hasBomb;
 	private boolean hasFlag;
 	private boolean selected;
+	private boolean flagMode;
 	
 	//definindo getters e setters
+	
 	
 	public boolean getBomb() {
 		return this.hasBomb;
@@ -28,17 +30,18 @@ public class Celula {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-	
+	public boolean getFlagMode() {
+		return this.flagMode;
+	}
+	public void setFlagMode(boolean flagMode) {
+		this.flagMode = flagMode;
+	}
 
 	//método para checar se a célula tem bomba
 	
 	public boolean checkCelula() {
-		if (hasBomb) {
-			return true;
-		}
-		else {
-			return false;
-		}
+			return getBomb();
+		
 	}
 	
 	//método para adicionar bomba na célula
@@ -52,6 +55,8 @@ public class Celula {
 	public void selecting() { 
 		this.setSelected(true);
 	}
+			
+	
 	
 	//método para colocar bandeira na célula
 	
