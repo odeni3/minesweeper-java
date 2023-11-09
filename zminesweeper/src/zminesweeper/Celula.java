@@ -19,7 +19,7 @@ public class Celula {
 		this.hasBomb = bomb;
 	}
 	public boolean getFlag() {
-		return this.hasBomb;
+		return this.hasFlag;
 	}
 	public void setFlag(boolean flag) {
 		this.hasFlag = flag;
@@ -40,8 +40,7 @@ public class Celula {
 	//método para checar se a célula tem bomba
 	
 	public boolean checkCelula() {
-			return getBomb();
-		
+			return getBomb();	
 	}
 	
 	//método para adicionar bomba na célula
@@ -55,8 +54,6 @@ public class Celula {
 	public void selecting() { 
 		this.setSelected(true);
 	}
-			
-	
 	
 	//método para colocar bandeira na célula
 	
@@ -72,21 +69,8 @@ public class Celula {
 	
 	//método para printar as bombas e células
 	
-	//isso só foi usado para testar se as bombas realmente estavam funcionando, mas podemos deixar salvo para utilizar para mostrar as bombas no fim do jogo
-	
 	@Override
 	public String toString() {
-		/*if (hasBomb) {
-			return "☼";
-		}
-		else {
-			if ((!checkCelula()) && selected) {
-				return "+";
-			}
-			else {
-				return "-";
-			}
-		}*/
 		if ((selected == true) && (hasBomb == true)) {
 			return "☼";
 		}

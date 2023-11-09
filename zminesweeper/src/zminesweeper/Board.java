@@ -1,7 +1,6 @@
 package zminesweeper;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class Board {
 	
@@ -18,7 +17,6 @@ public class Board {
 		this.line = line;
 		this.column = column;
 		this.numBomb = numBomb;
-		
 	}
 	
 	//definindo método para adicionar bombas randomicamente
@@ -34,8 +32,7 @@ public class Board {
 			if (!square[lineRandom][columnRandom].checkCelula()) {
 				square[lineRandom][columnRandom].addBombCelula();
 			}
-		}
-		
+		}	
 	}
 	
 	//definindo método para inicializar jogo
@@ -49,27 +46,40 @@ public class Board {
 			}
 		}
 		addBombBoard();
+		calculateBombs();
 	}
 	
-	
-	/*public void userFlagMode(String mode) {
+	//definindo método para entrar no modo flag para adicionar flags
+	/*
+	public void userFlagMode(String mode) {
 		boolean boolMode;
 		boolMode = Boolean.getBoolean(mode);
 		if( mode == "TRUE" ) {
 			boolMode.setFlagMode(true);
-		}
-			
+		}	
 	}
 	*/
 	
-	
-	//método para selecionar célula (NÃO ESTÁ COMPLETO)
-	
+	//definindo método para selecionar as células
 	
 	public void userSelect(int selectedLine, int selectedColumn) {
-		square[selectedLine][selectedColumn].selecting();
-
-
+		square[selectedLine-1][selectedColumn-1].selecting();
+	}
+	
+	//definindo método para calcular o número de bombas ao redor
+	
+	public int calculateBombs(){
+		int cont = 0;
+		for (int i = line - 1; i <= line + 1; i++) {
+		    for (int j = column - 1; j <= column + 1; j++) {
+		        if (i >= 0 && i < square.length && j >= 0 && j < square[i].length) {
+		            if (square[i][j].checkCelula()) {
+		                cont++;
+		            }
+		        }
+		    }
+		}
+		return cont;
 	}
 	
 	//método para printar os quadradinhos
@@ -85,5 +95,4 @@ public class Board {
 		}
 		return c;
 	}
-	
 }

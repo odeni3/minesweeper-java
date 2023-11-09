@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class Main {
 	
-	//método main
+	//definindo método main
 
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		Board tabMain =  new Board(7,7,48);
+		Board tabMain =  new Board(7,7,7);
 		tabMain.startGame();
 		System.out.println(tabMain);
 		
@@ -28,11 +28,6 @@ public class Main {
 			System.out.println("Digite a coluna:");
 			j = sc.nextInt();
 			tabMain.userSelect(i,j);
-
 		}
-
-		
-
 	}
-
 }
