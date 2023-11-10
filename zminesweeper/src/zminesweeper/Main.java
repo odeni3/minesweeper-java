@@ -20,6 +20,7 @@ public class Main {
 		int j = sc.nextInt();
 		
 		tabMain.userSelect(i,j);
+		System.out.println("tem "+tabMain.calculateBombs()+" bombas ao redor");
 		
 		while (true) {
 			System.out.println(tabMain);
@@ -28,6 +29,7 @@ public class Main {
 			System.out.println("Digite a coluna:");
 			j = sc.nextInt();
 			tabMain.userSelect(i,j);
+			System.out.println("tem "+tabMain.calculateBombs()+" bombas ao redor");
 		}
 	}
 }

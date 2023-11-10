@@ -10,6 +10,7 @@ public class Board {
 	private int line;
 	private int column;
 	private int numBomb;
+	private int cont;
 	
 	//definindo método construtor do tabuleiro
 	
@@ -46,7 +47,6 @@ public class Board {
 			}
 		}
 		addBombBoard();
-		calculateBombs();
 	}
 	
 	//definindo método para entrar no modo flag para adicionar flags
@@ -64,12 +64,14 @@ public class Board {
 	
 	public void userSelect(int selectedLine, int selectedColumn) {
 		square[selectedLine-1][selectedColumn-1].selecting();
+		line = selectedLine-1;
+		column = selectedColumn-1;
 	}
 	
-	//definindo método para calcular o número de bombas ao redor
+	//definindo método para calcular o número de bombas ao redor (NAO ESTA TOTALMENTE CERTO)
 	
 	public int calculateBombs(){
-		int cont = 0;
+		cont = 0;
 		for (int i = line - 1; i <= line + 1; i++) {
 		    for (int j = column - 1; j <= column + 1; j++) {
 		        if (i >= 0 && i < square.length && j >= 0 && j < square[i].length) {
@@ -89,7 +91,12 @@ public class Board {
 		String c = "";
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 7; j++) {
-				c += square[i][j] + " ";
+				if ((square[i][j].checkSelected()) && (!square[i][j].checkCelula())) {
+					c += square[i][j] + ""+ calculateBombs();
+				}
+				else {
+					c += square[i][j] + "";
+				}
 			}
 			c += "\n";
 		}

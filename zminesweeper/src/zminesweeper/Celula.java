@@ -40,7 +40,11 @@ public class Celula {
 	//método para checar se a célula tem bomba
 	
 	public boolean checkCelula() {
-			return getBomb();	
+		return getBomb();	
+	}
+	
+	public boolean checkSelected() {
+		return getSelected();
 	}
 	
 	//método para adicionar bomba na célula
@@ -71,11 +75,11 @@ public class Celula {
 	
 	@Override
 	public String toString() {
-		if ((selected == true) && (hasBomb == true)) {
+		if ((checkSelected()) && (checkCelula())) {
 			return "☼";
 		}
-		else if ((selected == true) && (hasBomb == false)) {
-				return "+";
+		else if ((checkSelected()) && (!checkCelula())) {
+		return "";
 		}
 		else {
 			return "-";
