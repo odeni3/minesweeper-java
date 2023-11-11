@@ -11,7 +11,6 @@ public class Celula {
 	
 	//definindo getters e setters
 	
-	
 	public boolean getBomb() {
 		return this.hasBomb;
 	}
@@ -42,6 +41,8 @@ public class Celula {
 	public boolean checkCelula() {
 		return getBomb();	
 	}
+	
+	//método para checar se a célula está selecionada
 	
 	public boolean checkSelected() {
 		return getSelected();
@@ -76,13 +77,13 @@ public class Celula {
 	@Override
 	public String toString() {
 		if ((checkSelected()) && (checkCelula())) {
-			return "☼";
+			return "X";
 		}
 		else if ((checkSelected()) && (!checkCelula())) {
-		return "";
+			return "";
 		}
 		else {
-			return "-";
+			return "□";
 		}
 	}
 }

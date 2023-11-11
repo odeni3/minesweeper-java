@@ -10,7 +10,6 @@ public class Board {
 	private int line;
 	private int column;
 	private int numBomb;
-	private int cont;
 	
 	//definindo método construtor do tabuleiro
 	
@@ -64,16 +63,14 @@ public class Board {
 	
 	public void userSelect(int selectedLine, int selectedColumn) {
 		square[selectedLine-1][selectedColumn-1].selecting();
-		line = selectedLine-1;
-		column = selectedColumn-1;
 	}
 	
 	//definindo método para calcular o número de bombas ao redor (NAO ESTA TOTALMENTE CERTO)
 	
-	public int calculateBombs(){
-		cont = 0;
-		for (int i = line - 1; i <= line + 1; i++) {
-		    for (int j = column - 1; j <= column + 1; j++) {
+	public int calculateBombs(int calcSelectedLine, int calcSelectedColumn){
+		int cont = 0;
+		for (int i = calcSelectedLine - 1; i <= calcSelectedLine + 1; i++) {
+		    for (int j = calcSelectedColumn - 1; j <= calcSelectedColumn + 1; j++) {
 		        if (i >= 0 && i < square.length && j >= 0 && j < square[i].length) {
 		            if (square[i][j].checkCelula()) {
 		                cont++;
@@ -92,7 +89,7 @@ public class Board {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 7; j++) {
 				if ((square[i][j].checkSelected()) && (!square[i][j].checkCelula())) {
-					c += square[i][j] + ""+ calculateBombs();
+					c += square[i][j] + ""+ calculateBombs(i,j);
 				}
 				else {
 					c += square[i][j] + "";
