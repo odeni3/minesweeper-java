@@ -48,7 +48,7 @@ public class Board {
 		addBombBoard();
 	}
 	
-	//definindo método para entrar no modo flag para adicionar flags
+	//definindo método para entrar no modo flag para adicionar flags (INCOMPLETO)
 	/*
 	public void userFlagMode(String mode) {
 		boolean boolMode;
@@ -61,11 +61,30 @@ public class Board {
 	
 	//definindo método para selecionar as células
 	
-	public void userSelect(int selectedLine, int selectedColumn) {
-		square[selectedLine-1][selectedColumn-1].selecting();
-	}
-	
-	//definindo método para calcular o número de bombas ao redor (NAO ESTA TOTALMENTE CERTO)
+    public void userSelect(int selectedLine, int selectedColumn) {
+        selectedLine--;
+        selectedColumn--;
+        automaticPropagation(selectedLine, selectedColumn);
+    }
+    
+    //definindo método para função de propagação automática
+
+    public void automaticPropagation(int lineAuto, int columnAuto) {
+        if (lineAuto >= 0 && lineAuto < square.length && columnAuto >= 0 && columnAuto < square[lineAuto].length) {
+            if (!square[lineAuto][columnAuto].checkCelula() && calculateBombs(lineAuto, columnAuto) == 0 && !square[lineAuto][columnAuto].checkSelected()) {
+                square[lineAuto][columnAuto].selecting();
+                for (int i = lineAuto - 1; i <= lineAuto + 1; i++) {
+                    for (int j = columnAuto - 1; j <= columnAuto + 1; j++) {
+                        automaticPropagation(i, j);
+                    }
+                }
+            } else {
+                square[lineAuto][columnAuto].selecting();
+            }
+        }
+    }	
+
+	//definindo método para calcular o número de bombas ao redor
 	
 	public int calculateBombs(int calcSelectedLine, int calcSelectedColumn){
 		int cont = 0;
