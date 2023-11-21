@@ -17,35 +17,32 @@ public class Celula {
 	public void setBomb(boolean bomb) {
 		this.hasBomb = bomb;
 	}
-	public boolean getFlag() {
-		return this.hasFlag;
-	}
-	public void setFlag(boolean flag) {
-		this.hasFlag = flag;
-	}
+	
 	public boolean getSelected() {
 		return this.selected;
 	}
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-	public boolean getFlagMode() {
-		return this.flagMode;
+	public boolean getHasFlag() {
+		return this.hasFlag;
 	}
-	public void setFlagMode(boolean flagMode) {
-		this.flagMode = flagMode;
+	public void setHasFlag(boolean hasFlag) {
+		this.hasFlag = hasFlag;
 	}
 
-	//método para checar se a célula tem bomba
+
 	
+	//método para ver se tem flag
 	public boolean checkFlag() {
-		return getFlagMode();
+		return getHasFlag();
 	}
 	
-	public void flagModeOn() {
-		this.setFlagMode(true);
+	//método para colocar flag
+	public void addFlag() {
+		this.setHasFlag(true);
 	}
-	
+	//método para ver se a célula tem bomba
 	public boolean checkCelula() {
 		return getBomb();	
 	}
@@ -68,18 +65,8 @@ public class Celula {
 		this.setSelected(true);
 	}
 	
-	//método para colocar bandeira na célula
 	
-	public void addFlag() {
-		this.setFlag(true);
-	}
-	
-	//método para tirar bandeira da célula
-	
-	public void removeFlag() {
-		this.setFlag(false);
-	}
-	
+
 	//método para printar as bombas e células
 	
 	@Override
