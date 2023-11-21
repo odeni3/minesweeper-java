@@ -48,23 +48,18 @@ public class Board {
 		addBombBoard();
 	}
 	
-	//definindo método para entrar no modo flag para adicionar flags (INCOMPLETO)
-	/*
-	public void userFlagMode(String mode) {
-		boolean boolMode;
-		boolMode = Boolean.getBoolean(mode);
-		if( mode == "TRUE" ) {
-			boolMode.setFlagMode(true);
-		}	
-	}
-	*/
+
 	
 	//definindo método para selecionar as células
 	
-    public void userSelect(int selectedLine, int selectedColumn) {
+    public void userSelect(int selectedLine, int selectedColumn, int intention) {
         selectedLine--;
         selectedColumn--;
         automaticPropagation(selectedLine, selectedColumn);
+        if (intention == 1) {
+        	System.out.println("teste para ver se ta caindo no if");
+        	square[selectedLine][selectedColumn].addFlag();
+        }
     }
     
     //definindo método para função de propagação automática

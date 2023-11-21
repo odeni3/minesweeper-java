@@ -38,6 +38,14 @@ public class Celula {
 
 	//método para checar se a célula tem bomba
 	
+	public boolean checkFlag() {
+		return getFlagMode();
+	}
+	
+	public void flagModeOn() {
+		this.setFlagMode(true);
+	}
+	
 	public boolean checkCelula() {
 		return getBomb();	
 	}
@@ -81,6 +89,9 @@ public class Celula {
 		}
 		else if ((checkSelected()) && (!checkCelula())) {
 			return "";
+		}
+		else if ((checkSelected()) && (checkFlag())) {
+			return "f";
 		}
 		else {
 			return "□";
