@@ -48,23 +48,29 @@ public class Board {
 		addBombBoard();
 	}
 	
-	//definindo método para entrar no modo flag para adicionar flags (INCOMPLETO)
-	/*
-	public void userFlagMode(String mode) {
-		boolean boolMode;
-		boolMode = Boolean.getBoolean(mode);
-		if( mode == "TRUE" ) {
-			boolMode.setFlagMode(true);
-		}	
-	}
-	*/
-	
 	//definindo método para selecionar as células
 	
-    public void userSelect(int selectedLine, int selectedColumn) {
+    public void userSelect(int selectedLine, int selectedColumn, int intention) {
         selectedLine--;
         selectedColumn--;
-        automaticPropagation(selectedLine, selectedColumn);
+        if (intention == 1) {
+        	if (!square[selectedLine][selectedColumn].checkSelected()) {
+        		square[selectedLine][selectedColumn].setHasFlag(true);
+	        	square[selectedLine][selectedColumn].selecting();
+        	}
+        }
+        else if(intention == 0) {
+        	automaticPropagation(selectedLine, selectedColumn);
+        }
+        else if(intention == 2) {
+        	if (square[selectedLine][selectedColumn].checkFlag()) {
+	        	square[selectedLine][selectedColumn].setHasFlag(false);
+	        	square[selectedLine][selectedColumn].unselecting();
+        	}
+        }
+        else {
+        	System.out.println("INVALIDO! TENTE NOVAMENTE!!");
+        }
     }
     
     //definindo método para função de propagação automática
@@ -78,8 +84,7 @@ public class Board {
                         automaticPropagation(i, j);
                     }
                 }
-            } 
-            else {
+            } else {
                 square[lineAuto][columnAuto].selecting();
             }
         }
@@ -108,9 +113,10 @@ public class Board {
 		String c = "";
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 7; j++) {
-				if ((square[i][j].checkSelected()) && (!square[i][j].checkCelula())) {
+				if ((square[i][j].checkSelected()) && (!square[i][j].checkCelula()) && (!square[i][j].checkFlag())) {
 					c += square[i][j] + ""+ calculateBombs(i,j);
 				}
+				
 				else {
 					c += square[i][j] + "";
 				}
