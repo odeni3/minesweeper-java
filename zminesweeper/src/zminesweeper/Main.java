@@ -22,6 +22,7 @@ public class Main {
 		int k = sc.nextInt();
 		
 		tabMain.userSelect(i,j,k);
+
 		
 		while (true) {
 			System.out.println(tabMain);
@@ -32,6 +33,7 @@ public class Main {
 			System.out.println("Digite: 0 (REVELAR CASA) -> 1 (ADD BANDEIRA) -> 2 (RETIRAR BANDEIRA):");
 			k = sc.nextInt();
 			tabMain.userSelect(i,j,k);
+
 		}
 	}
 }

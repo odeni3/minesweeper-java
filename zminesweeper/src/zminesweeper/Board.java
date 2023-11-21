@@ -61,6 +61,10 @@ public class Board {
         }
         else if(intention == 0) {
         	automaticPropagation(selectedLine, selectedColumn);
+        	if ((square[selectedLine][selectedColumn].checkSelected()) && (square[selectedLine][selectedColumn].checkCelula())){
+        		System.out.println(this);
+        		gameOver();
+        	}
         }
         else if(intention == 2) {
         	if (square[selectedLine][selectedColumn].checkFlag()) {
@@ -71,6 +75,18 @@ public class Board {
         else {
         	System.out.println("INVALIDO! TENTE NOVAMENTE!!");
         }
+    }
+    
+  //definindo método para função de GAMEOVER
+    
+    public void gameOver() {
+    	System.out.println("B O O M !!!!!!");
+		try { //LÓGICA PARA GAMEOVER
+			Thread.sleep(3000);
+			System.exit(0);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     }
     
     //definindo método para função de propagação automática
@@ -111,8 +127,8 @@ public class Board {
 	@Override
 	public String toString() {
 		String c = "";
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 7; j++) {
+		for (int i = 0; i < square.length; i++) {
+			for (int j = 0; j < square[i].length; j++) {
 				if ((square[i][j].checkSelected()) && (!square[i][j].checkCelula()) && (!square[i][j].checkFlag())) {
 					c += square[i][j] + ""+ calculateBombs(i,j);
 				}
