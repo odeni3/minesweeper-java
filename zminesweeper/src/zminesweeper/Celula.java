@@ -7,7 +7,6 @@ public class Celula {
 	private boolean hasBomb;
 	private boolean hasFlag;
 	private boolean selected;
-	private boolean flagMode;
 	
 	//definindo getters e setters
 	
@@ -17,26 +16,32 @@ public class Celula {
 	public void setBomb(boolean bomb) {
 		this.hasBomb = bomb;
 	}
-	public boolean getFlag() {
-		return this.hasFlag;
-	}
-	public void setFlag(boolean flag) {
-		this.hasFlag = flag;
-	}
+	
 	public boolean getSelected() {
 		return this.selected;
 	}
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-	public boolean getFlagMode() {
-		return this.flagMode;
+	public boolean getHasFlag() {
+		return this.hasFlag;
 	}
-	public void setFlagMode(boolean flagMode) {
-		this.flagMode = flagMode;
+	public void setHasFlag(boolean hasFlag) {
+		this.hasFlag = hasFlag;
 	}
-
-	//método para checar se a célula tem bomba
+	
+	//método para ver se tem flag
+	
+	public boolean checkFlag() {
+		return getHasFlag();
+	}
+	
+	//método para colocar flag
+	
+	public void addFlag() {
+		this.setHasFlag(true);
+	}
+	//método para ver se a célula tem bomba
 	
 	public boolean checkCelula() {
 		return getBomb();	
@@ -60,27 +65,24 @@ public class Celula {
 		this.setSelected(true);
 	}
 	
-	//método para colocar bandeira na célula
+	//método para deselecionar célula
 	
-	public void addFlag() {
-		this.setFlag(true);
+	public void unselecting() {
+		this.setSelected(false);
 	}
-	
-	//método para tirar bandeira da célula
-	
-	public void removeFlag() {
-		this.setFlag(false);
-	}
-	
+
 	//método para printar as bombas e células
 	
 	@Override
 	public String toString() {
-		if ((checkSelected()) && (checkCelula())) {
+		if ((checkSelected()) && (checkCelula()) && (!checkFlag())) {
 			return "X";
 		}
-		else if ((checkSelected()) && (!checkCelula())) {
+		else if ((checkSelected()) && (!checkCelula()) && (!checkFlag())) {
 			return "";
+		}
+		else if (checkFlag()) {
+			return "=";
 		}
 		else {
 			return "□";
