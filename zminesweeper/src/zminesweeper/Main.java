@@ -10,7 +10,7 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		Board tabMain =  new Board(7,7,7);
+		Board tabMain =  new Board(7,7,1);
 		tabMain.startGame();
 		System.out.println(tabMain);
 		
@@ -23,7 +23,6 @@ public class Main {
 		
 		tabMain.userSelect(i,j,k);
 
-		
 		while (true) {
 			System.out.println(tabMain);
 			System.out.println("Digite a linha:");
