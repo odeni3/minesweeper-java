@@ -60,7 +60,6 @@ public class Board {
 	    
 	    //adicionar flag
 	    if (intention == 1) {
-
 	        if (!square[selectedLine][selectedColumn].checkSelected()) {
 	        	square[selectedLine][selectedColumn].setHasFlag(true);
 	        	square[selectedLine][selectedColumn].selecting();
@@ -83,12 +82,14 @@ public class Board {
 	            square[selectedLine][selectedColumn].unselecting();
 
 	        }
-	    } else {
+	    } 
+	    
+	    else {
 	        System.out.println("Ação inválida! Tente novamente!!");
 	    }
 	}
 
-  //definindo método para função de GAMEOVER
+	//definindo método para função de GAMEOVER
     
 	public void gameOver() {
 	    System.out.println("B O O M !!!!!!");
@@ -141,7 +142,6 @@ public class Board {
 	    return cont;
 	}
 
-	
 	//método para printar os quadradinhos
 	
 	@Override
