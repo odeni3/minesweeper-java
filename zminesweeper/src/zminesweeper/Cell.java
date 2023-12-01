@@ -1,13 +1,22 @@
 package zminesweeper;
 
-public abstract class Celula {
+public abstract class Cell {
 	
 	//definindo atributos
 	
+	private boolean checkedToScore = false;
 	private boolean hasFlag;
 	private boolean selected;
 	
 	//definindo getters e setters
+	
+	public boolean getCheckedToScore() {
+		return checkedToScore;
+	}
+
+    public void setCheckedToScore(boolean checkedtoScore) {
+        this.checkedToScore = true;
+    }
 	
 	public boolean getSelected() {
 		return this.selected;
@@ -53,17 +62,5 @@ public abstract class Celula {
 	
 	public void unselecting() {
 		this.setSelected(false);
-	}
-
-	//método para printar as bombas e células
-	
-	@Override
-	public String toString() {
-		if (checkFlag()) {
-			return "=";
-		}
-		else {
-			return "□";
-		}
 	}
 }

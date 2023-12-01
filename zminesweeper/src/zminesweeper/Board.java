@@ -6,7 +6,7 @@ public class Board {
 	
 	//definindo atributos
 	
-	private Celula[][] square;
+	private Cell[][] square;
 	private int line;
 	private int column;
 	private int numBomb;
@@ -28,8 +28,8 @@ public class Board {
 	        int lineRandom = rn.nextInt(line);
 	        int columnRandom = rn.nextInt(column);
 
-	        if (!(square[lineRandom][columnRandom] instanceof Bomba)) {
-	        	square[lineRandom][columnRandom] = new Bomba();
+	        if (!(square[lineRandom][columnRandom] instanceof Bomb)) {
+	        	square[lineRandom][columnRandom] = new Bomb();
 	        }
 	    }
 	}
@@ -37,11 +37,11 @@ public class Board {
 	//definindo método para inicializar jogo
 	
 	public void startGame() {
-	    square = new Celula[line][column];
+	    square = new Cell[line][column];
 
 	    for (int i = 0; i < line; i++) {
 	        for (int j = 0; j < column; j++) {
-	            square[i][j] = new EspacoVazio();
+	            square[i][j] = new EmptySpace();
 	        }
 	    }
 	    addBombBoard();
@@ -49,53 +49,70 @@ public class Board {
 	
 	//definindo método para selecionar as células
 	
-	public void userSelect(int selectedLine, int selectedColumn, int intention) {
+	public void userSelect(int selectedLine, int selectedColumn, int intention, Player player) {
 	    selectedLine--;
 	    selectedColumn--;
 
 	    if (selectedLine < 0 || selectedLine >= line || selectedColumn < 0 || selectedColumn >= column) {
+	        System.out.println();
 	        System.out.println("Posição inválida! Tente novamente!!");
+	        System.out.println();
 	        return;
 	    }
-	    
-	    //adicionar flag
+
+	    // adicionar flag
 	    if (intention == 1) {
 	        if (!square[selectedLine][selectedColumn].checkSelected()) {
-	        	square[selectedLine][selectedColumn].setHasFlag(true);
-	        	square[selectedLine][selectedColumn].selecting();
+	            square[selectedLine][selectedColumn].setHasFlag(true);
+	            square[selectedLine][selectedColumn].selecting();
 	        }
-	    } 
-	    
-	    //propagação automática
+	    }
+
+	    // propagação automática
 	    else if (intention == 0) {
 	        automaticPropagation(selectedLine, selectedColumn);
-	        if ((square[selectedLine][selectedColumn] instanceof Bomba) && (square[selectedLine][selectedColumn].checkSelected()) && (!square[selectedLine][selectedColumn].checkFlag())) {
+	        if ((square[selectedLine][selectedColumn] instanceof Bomb) && (square[selectedLine][selectedColumn].checkSelected()) && (!square[selectedLine][selectedColumn].checkFlag())) {
 	            System.out.println(this);
-	            gameOver();
+	            gameOver(player);
 	        }
-	    } 
-	    
-	    //remover flag
+	    }
+
+	    // remover flag
 	    else if (intention == 2) {
 	        if (square[selectedLine][selectedColumn].checkFlag()) {
-	        	square[selectedLine][selectedColumn].setHasFlag(false);
+	            square[selectedLine][selectedColumn].setHasFlag(false);
 	            square[selectedLine][selectedColumn].unselecting();
-
 	        }
-	    } 
-	    
+	    }
+
+	    // revelar casa
 	    else {
-	        System.out.println("Ação inválida! Tente novamente!!");
+	        if (square[selectedLine][selectedColumn] instanceof Bomb) {
+	            System.out.println(this);
+	            gameOver(player);
+	        } 
+	        else {
+	            square[selectedLine][selectedColumn].selecting();
+	        }
 	    }
 	}
 
 	//definindo método para função de GAMEOVER
     
-	public void gameOver() {
-	    System.out.println("B O O M !!!!!!");
+	public void gameOver(Player player) {
 	    try {
 	        //Lógica para GAMEOVER
-	        Thread.sleep(3000);
+	    	Thread.sleep(500);
+	    	System.out.println("3");
+	        Thread.sleep(1100);
+	        System.out.println("2");
+	        Thread.sleep(1100);
+	        System.out.println("1");
+	        Thread.sleep(1100);
+	        System.out.println("☢⚠☢ B O O M !!! ☢⚠☢");
+	        Thread.sleep(1100);
+	        System.out.println();
+	        System.out.println("[ "+player.getName()+" ]" + " PERDEU!!!");
 	        System.exit(0);
 	    } 
 	    catch (InterruptedException e) {
@@ -107,7 +124,7 @@ public class Board {
 
 	public void automaticPropagation(int lineAuto, int columnAuto) {
 	    if (lineAuto >= 0 && lineAuto < square.length && columnAuto >= 0 && columnAuto < square[lineAuto].length) {
-	        if (!(square[lineAuto][columnAuto] instanceof Bomba) && (calculateBombs(lineAuto, columnAuto) == 0) && (!square[lineAuto][columnAuto].checkSelected())) {
+	        if (!(square[lineAuto][columnAuto] instanceof Bomb) && calculateBombs(lineAuto, columnAuto) == 0 && !square[lineAuto][columnAuto].checkSelected()) {
 	            square[lineAuto][columnAuto].selecting();
 	            for (int i = lineAuto - 1; i <= lineAuto + 1; i++) {
 	                for (int j = columnAuto - 1; j <= columnAuto + 1; j++) {
@@ -117,7 +134,6 @@ public class Board {
 	                }
 	            }
 	        } 
-	        
 	        else {
 	            square[lineAuto][columnAuto].selecting();
 	        }
@@ -132,7 +148,7 @@ public class Board {
 	    for (int i = calcSelectedLine - 1; i <= calcSelectedLine + 1; i++) {
 	        for (int j = calcSelectedColumn - 1; j <= calcSelectedColumn + 1; j++) {
 	            if (i >= 0 && i < square.length && j >= 0 && j < square[i].length && (i != calcSelectedLine || j != calcSelectedColumn)) {
-	                if (square[i][j] instanceof Bomba) {
+	                if (square[i][j] instanceof Bomb) {
 	                    cont++;
 	                }
 	            }
@@ -140,6 +156,26 @@ public class Board {
 	    }
 
 	    return cont;
+	}
+	
+	//definindo método para calcular os pontos de cada jogador
+	
+	public void calculateScore(Player player) {
+	    int cont = 0;
+
+	    for (int i = 0; i < line; i++) {
+	        for (int j = 0; j < column; j++) {
+	            if (square[i][j].checkSelected() && !square[i][j].getCheckedToScore() && !square[i][j].checkFlag()) {
+	                cont++;
+	                square[i][j].setCheckedToScore(true);
+	            }
+	            else if (square[i][j].checkSelected() && !square[i][j].getCheckedToScore() && square[i][j] instanceof Bomb) {
+	                cont++;
+	                square[i][j].setCheckedToScore(true);
+	            }
+	        }
+	    }
+	    player.addScore(cont);
 	}
 
 	//método para printar os quadradinhos
@@ -149,10 +185,9 @@ public class Board {
 		String c = "";
 		for (int i = 0; i < square.length; i++) {
 			for (int j = 0; j < square[i].length; j++) {
-				if ((square[i][j].checkSelected()) && !(square[i][j] instanceof Bomba) && (!(square[i][j].checkFlag()))) {
+				if ((square[i][j].checkSelected()) && !(square[i][j] instanceof Bomb) && (!(square[i][j].checkFlag()))) {
 					c += square[i][j] + ""+ calculateBombs(i,j);
 				}
-				
 				else {
 					c += square[i][j] + "";
 				}
