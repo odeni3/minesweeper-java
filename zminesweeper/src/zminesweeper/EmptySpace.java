@@ -6,6 +6,12 @@ public class EmptySpace extends Cell {
 	
 	private boolean isEmpty;
 	
+	//definindo método construtor da célula vazia
+	
+	public EmptySpace() {
+        super();
+    }
+	
 	//definindo getters e setters
 	
 	public boolean getEmpty() {

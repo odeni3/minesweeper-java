@@ -16,7 +16,7 @@ public class Main {
         Player player1 = new Player(namePlayer1.toUpperCase(), 0);
         Player player2 = new Player(namePlayer2.toUpperCase(), 0);
 
-        Board tabMain = new Board(7,7,10);
+        Board tabMain = new Board(7,7,5);
         tabMain.startGame();
         System.out.println();
         System.out.println(tabMain);

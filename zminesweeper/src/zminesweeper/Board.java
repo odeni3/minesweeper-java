@@ -41,11 +41,20 @@ public class Board {
 
 	    for (int i = 0; i < line; i++) {
 	        for (int j = 0; j < column; j++) {
-	            square[i][j] = new EmptySpace();
+                square[i][j] = new Neighborhood();
 	        }
 	    }
 	    addBombBoard();
+	    
+	    for (int i = 0; i < line; i++) {
+	        for (int j = 0; j < column; j++) {
+	        	if (calculateBombs(i,j) == 0 && square[i][j] instanceof Neighborhood) {
+	        		square[i][j] = new EmptySpace();
+	        	}
+	        }
+	    }
 	}
+
 	
 	//definindo método para selecionar as células
 	
@@ -124,7 +133,7 @@ public class Board {
 
 	public void automaticPropagation(int lineAuto, int columnAuto) {
 	    if (lineAuto >= 0 && lineAuto < square.length && columnAuto >= 0 && columnAuto < square[lineAuto].length) {
-	        if (!(square[lineAuto][columnAuto] instanceof Bomb) && calculateBombs(lineAuto, columnAuto) == 0 && !square[lineAuto][columnAuto].checkSelected()) {
+	        if (!(square[lineAuto][columnAuto] instanceof Bomb) && (square[lineAuto][columnAuto] instanceof EmptySpace) && (!square[lineAuto][columnAuto].checkSelected())) {
 	            square[lineAuto][columnAuto].selecting();
 	            for (int i = lineAuto - 1; i <= lineAuto + 1; i++) {
 	                for (int j = columnAuto - 1; j <= columnAuto + 1; j++) {
@@ -157,6 +166,7 @@ public class Board {
 
 	    return cont;
 	}
+
 	
 	//definindo método para calcular os pontos de cada jogador
 	

@@ -5,7 +5,6 @@ public class Player {
 	//definindo atributos
 	
     private String name;
-    private boolean playing;
     private int score;
 
     //definindo método construtor da bomba
@@ -19,14 +18,6 @@ public class Player {
     
     public String getName() {
         return name;
-    }
-
-    public boolean isPlaying() {
-        return playing;
-    }
-
-    public void setPlaying(boolean playing) {
-        this.playing = playing;
     }
     
     public int getScore() {
