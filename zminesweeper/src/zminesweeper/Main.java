@@ -2,6 +2,9 @@ package zminesweeper;
 
 import java.util.Scanner;
 
+import boards.Board;
+import players.Player;
+
 public class Main {
 
     public static void main(String[] args) {

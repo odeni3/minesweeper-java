@@ -1,6 +1,12 @@
-package zminesweeper;
+package boards;
 
 import java.util.Random;
+
+import elements.Bomb;
+import elements.Cell;
+import elements.EmptySpace;
+import elements.Neighborhood;
+import players.Player;
 
 public class Board {
 	

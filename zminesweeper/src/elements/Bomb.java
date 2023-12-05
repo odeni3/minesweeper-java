@@ -1,4 +1,4 @@
-package zminesweeper;
+package elements;
 
 public class Bomb extends Cell {
 	

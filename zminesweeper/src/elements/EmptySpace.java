@@ -1,4 +1,4 @@
-package zminesweeper;
+package elements;
 
 public class EmptySpace extends Cell {
 

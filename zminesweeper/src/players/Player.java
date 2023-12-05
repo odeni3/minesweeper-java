@@ -1,4 +1,4 @@
-package zminesweeper;
+package players;
 
 public class Player {
     
