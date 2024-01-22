@@ -7,9 +7,18 @@ public abstract class Cell {
 	private boolean checkedToScore = false;
 	private boolean hasFlag;
 	private boolean selected;
+	private boolean crazyCell;
 	
 	//definindo getters e setters
 	
+	public boolean checkCrazyCell() {
+		return crazyCell;
+	}
+
+	public void setCrazyCell(boolean crazyCell) {
+		this.crazyCell = crazyCell;
+	}
+
 	public boolean getCheckedToScore() {
 		return checkedToScore;
 	}

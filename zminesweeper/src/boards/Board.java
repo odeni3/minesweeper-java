@@ -8,15 +8,34 @@ import elements.EmptySpace;
 import elements.Neighborhood;
 import players.Player;
 
+
 public class Board {
 	
 	//definindo atributos
 	
-	private Cell[][] square;
-	private int line;
-	private int column;
-	private int numBomb;
+	protected Cell[][] square;
+	protected int line;
+	protected int column;
+	protected int numBomb;
 	
+	public Cell [][] getSquare() {
+		return this.square;
+	}
+	
+	public void setSquare (Cell[][] square) {
+		this.square = square;
+	}
+	public int getLine() {
+		return this.line;
+	}
+	
+	public int getColumn() {
+		return this.column;
+	}
+	
+	public int getNumBomb() {
+		return this.numBomb;
+	}
 	//definindo método construtor do tabuleiro
 	
 	public Board(int line, int column, int numBomb) {
