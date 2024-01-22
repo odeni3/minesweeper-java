@@ -11,42 +11,29 @@ public class Main {
     public static void main(String[] args) {
     	Scanner sc = new Scanner(System.in);
     	
-    	System.out.println("Bem-vindo ao Jogo!");
-        System.out.println("Selecione o modo:");
-        System.out.println("0 - Modo 1 Jogador");
-        System.out.println("1 - Modo 2 Jogadores");
+        System.out.println("Selecione o modo: 0 (Um jogador) ->  1 (Dois jogadores): ");
 
-        int escolhaModo = sc.nextInt();
-
-        switch (escolhaModo) {
-            case 0:
-                System.out.println("Modo 1 Jogador selecionado.");
-                break;
-            case 1:
-                System.out.println("Modo 2 Jogadores selecionado.");
-                break;
-            default:
-                System.out.println("Opção inválida. Encerrando o jogo.");
-                sc.close();
-                return;
-        }
-
-        System.out.println("Selecione o tipo de jogo:");
-        System.out.println("0 - Modo Normal");
-        System.out.println("1 - Modo Maluco");
-
-        int escolhaTipoJogo = sc.nextInt();
-        System.out.println("");
+        int singleOuMultiplayer = sc.nextInt();
         
-        switch (escolhaTipoJogo) {
+        if ((singleOuMultiplayer != 0) && (singleOuMultiplayer != 1)) {
+        	System.out.println("Opção inválida. Encerrando o jogo.");
+        	System.exit(0);
+        }
+        
+        System.out.println("Selecione o tipo de jogo: 0 (Modo normal) -> 1 (Modo maluco): ");
+        
+        int normalOuMaluco = sc.nextInt();
+        sc.nextLine();
+        
+        
+        switch (normalOuMaluco) {
             case 0:
-                System.out.println("Modo Normal selecionado. Iniciando o jogo...");
-                if(escolhaModo == 1) {
+            	
+            	//dois jogadores e campo normal
+                if(singleOuMultiplayer == 1) {
                 	System.out.println("Digite o nome do primeiro jogador:");
                 	String namePlayer1 = sc.nextLine();
 
-                	
-                	
                 	System.out.println("Digite o nome do segundo jogador:");
                 	String namePlayer2 = sc.nextLine();
                 	System.out.println();
@@ -54,7 +41,7 @@ public class Main {
                     Player player1 = new Player(namePlayer1.toUpperCase(), 0);
                     Player player2 = new Player(namePlayer2.toUpperCase(), 0);
 
-                    Board tabMain = new Board(7,7,2);
+                    Board tabMain = new Board(7,7,10);
                     tabMain.startGame();
                     System.out.println();
                     System.out.println(tabMain);
@@ -71,33 +58,13 @@ public class Main {
                     }
                 	
                 }
-                else {
-                	if(escolhaModo == 0) {
-                		System.out.println("digite o nome do jogador:");
-                		String namePlayer1 = sc.nextLine();
-                		Player player1 = new Player(namePlayer1.toUpperCase(), 0);
-                		Board tabMain = new Board(7,7,17);
-                		tabMain.startGame();
-                		System.out.println();
-                		System.out.println(tabMain);
-                		
-                		while (true) {
-                			playerTurn(tabMain,sc, player1);
-                			System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
-                            System.out.println();
-                			
-                		}
-                	}
-                }
-                break;
-            case 1:
-                System.out.println("Modo Maluco selecionado. Iniciando o jogo...");
-                if(escolhaModo == 0) {
-                	
-                	System.out.println("digite o nome do jogador:");
+                
+                //um jogador e campo normal
+                else if (singleOuMultiplayer == 0){
+            		System.out.println("digite o nome do jogador:");
             		String namePlayer1 = sc.nextLine();
             		Player player1 = new Player(namePlayer1.toUpperCase(), 0);
-            		Board tabMain = new CrazyBoard(7,7,17,1);
+            		Board tabMain = new Board(7,7,10);
             		tabMain.startGame();
             		System.out.println();
             		System.out.println(tabMain);
@@ -107,17 +74,63 @@ public class Main {
             			System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
                         System.out.println();
             			
+            		}
+                }
+                break;
+                
+            case 1:
+            	
+            	//um jogador e campo maluco
+                if(singleOuMultiplayer == 0) {
+                	System.out.println("digite o nome do jogador:");
+            		String namePlayer1 = sc.nextLine();
+            		Player player1 = new Player(namePlayer1.toUpperCase(), 0);
+            		Board tabMain = new CrazyBoard(7,7,10,10);
+            		tabMain.startGame();
+            		System.out.println();
+            		System.out.println(tabMain);
+            		
+            		while (true) {
+            			playerTurn(tabMain,sc, player1);
+            			System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
+                        System.out.println();
                 	
             		}
                 }
-            		else {
-                	if(escolhaModo == 1) {
-                		
-                	}
-                }
+                
+                //dois jogadores e campo maluco
+            	else if (singleOuMultiplayer == 1){
+            		System.out.println("Digite o nome do primeiro jogador:");
+                	String namePlayer1 = sc.nextLine();
+
+                	System.out.println("Digite o nome do segundo jogador:");
+                	String namePlayer2 = sc.nextLine();
+                	System.out.println();
+
+                    Player player1 = new Player(namePlayer1.toUpperCase(), 0);
+                    Player player2 = new Player(namePlayer2.toUpperCase(), 0);
+
+                    Board tabMain = new CrazyBoard(7,7,10,10);
+                    tabMain.startGame();
+                    System.out.println();
+                    System.out.println(tabMain);
+                   
+                    while (true) {
+                        playerTurn(tabMain, sc, player1);
+                        System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
+                        System.out.println("| " + player2.getName() + " | SCORE: " + player2.getScore());
+                        System.out.println();
+                        playerTurn(tabMain, sc, player2);
+                        System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
+                        System.out.println("| " + player2.getName() + " | SCORE: " + player2.getScore());
+                        System.out.println();
+                    }	
+            	}
                 break;
+                
             default:
                 System.out.println("Opção inválida. Encerrando o jogo.");
+                System.exit(0);
         }
 
     }

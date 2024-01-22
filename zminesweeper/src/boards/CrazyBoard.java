@@ -83,21 +83,22 @@ public class CrazyBoard extends Board{
 	        if (!(square[selectedLine][selectedColumn].checkSelected()) && !(square[selectedLine][selectedColumn].checkCrazyCell())) {
 	            square[selectedLine][selectedColumn].setHasFlag(true);
 	            square[selectedLine][selectedColumn].selecting();
-	        } else if (!(square[selectedLine][selectedColumn].checkSelected()) && (square[selectedLine][selectedColumn].checkCrazyCell())) {
-	            
-	        	// Adicionar lógica para alternar o estado com base em uma probabilidade
-	        	
+	        } 
+	        else if (!(square[selectedLine][selectedColumn].checkSelected()) && (square[selectedLine][selectedColumn].checkCrazyCell())) {
 	            Random random = new Random();
-	            
-	            double probabilidadeAlternar = 0.5; // Defina a probabilidade desejada (entre 0 e 1)
-
+	            double probabilidadeAlternar = 0.5; 
+	            square[selectedLine][selectedColumn].setHasFlag(true);
+	            square[selectedLine][selectedColumn].selecting();
 	            if (random.nextDouble() < probabilidadeAlternar) {
-	                // Alternar o estado da célula
 	            	if(calculateBombs(selectedLine,selectedColumn) == 0){
 	            		square[selectedLine][selectedColumn] =  new EmptySpace();
+	            		square[selectedLine][selectedColumn].setSelected(false);
+	            		square[selectedLine][selectedColumn].setHasFlag(true);
 	            	}
 	            	else {
 	            		square[selectedLine][selectedColumn] =  new Neighborhood();
+	            		square[selectedLine][selectedColumn].setSelected(false);
+	            		square[selectedLine][selectedColumn].setHasFlag(true);
 	            	}
 	            } 
 	        }
