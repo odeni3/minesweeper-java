@@ -17,6 +17,7 @@ public abstract class NormalBoard implements InterfaceBoard {
 	protected int line;
 	protected int column;
 	protected int numBomb;
+	protected int numBombsFlagged;
 	
 	public Cell [][] getSquare() {
 		return this.square;
@@ -49,22 +50,26 @@ public abstract class NormalBoard implements InterfaceBoard {
 	//definindo método para adicionar bombas randomicamente
 	
 	public void addBombBoard() throws InvalidAttributeValueException {
-	    Random rn = new Random();
-	    
-	    //lançando exceção caso o número de bombas seja maior que o número de células
-	    
-	    if (numBomb > (line * column)) {
-	        throw new InvalidAttributeValueException("Número de bombas maior do que o número total de células no tabuleiro.");
-	    }
-	    
-	    for (int z = 0; z < numBomb; z++) {
-	        int lineRandom = rn.nextInt(line);
-	        int columnRandom = rn.nextInt(column);
+		 Random rn = new Random();
 
-	        if (!(square[lineRandom][columnRandom] instanceof Bomb)) {
-	        	square[lineRandom][columnRandom] = new Bomb();
-	        }
-	    }
+		 // Lançando exceção caso o número de bombas seja maior que o número de células
+		 
+		 if (numBomb > (line * column)) {
+		     throw new InvalidAttributeValueException("Número de bombas maior do que o número total de células no tabuleiro.");
+		 }
+
+		 // Inicializa o número de bombas marcadas com bandeiras
+		 
+		 numBombsFlagged = 0;
+
+		 for (int z = 0; z < numBomb; z++) {
+		     int lineRandom = rn.nextInt(line);
+		     int columnRandom = rn.nextInt(column);
+
+		     if (!(square[lineRandom][columnRandom] instanceof Bomb)) {
+		         square[lineRandom][columnRandom] = new Bomb();
+		     }
+		 }
 	}
 	
 	//definindo método para inicializar jogo
@@ -114,7 +119,22 @@ public abstract class NormalBoard implements InterfaceBoard {
 	        if (!square[selectedLine][selectedColumn].checkSelected()) {
 	            square[selectedLine][selectedColumn].setHasFlag(true);
 	            square[selectedLine][selectedColumn].selecting();
+	            
+	            // Incrementar o número de bombas marcadas com bandeiras
+	            
+	            if (square[selectedLine][selectedColumn] instanceof Bomb) {
+	                numBombsFlagged++;
+	            }
+
+	            // Verificar se todas as bombas foram marcadas com bandeiras para vencer o jogo
+	            
+	            if (numBombsFlagged == numBomb) {
+	            	System.out.println(this);
+	            	System.out.println("[ "+player.getName()+" ]" + " VENCEU!!!"+ " | SCORE: " + (player.getScore()+1));
+	            	System.exit(0);
+	            }
 	        }
+	        
 	    }
 
 	    // propagação automática
@@ -260,3 +280,5 @@ public abstract class NormalBoard implements InterfaceBoard {
 		return c;
 	}
 }
+
+

@@ -99,7 +99,7 @@ public class Main {
             		
             		Player player1 = new Player(namePlayer1.toUpperCase(), 0);
             		
-            		CrazyBoard tabMain = new CrazyBoard(7,7,20,49);
+            		CrazyBoard tabMain = new CrazyBoard(12,12,20,49);
             		tabMain.startGame();
             		System.out.println();
             		System.out.println(tabMain);
@@ -124,7 +124,7 @@ public class Main {
                     Player player1 = new Player(namePlayer1.toUpperCase(), 0);
                     Player player2 = new Player(namePlayer2.toUpperCase(), 0);
 
-                    CrazyBoard tabMain = new CrazyBoard(12,12,20,40);
+                    CrazyBoard tabMain = new CrazyBoard(12,12,20,49);
                     tabMain.startGame();
                     System.out.println();
                     System.out.println(tabMain);
