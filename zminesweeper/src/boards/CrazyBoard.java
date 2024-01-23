@@ -7,18 +7,15 @@ import elements.Bomb;
 import elements.Cell;
 import elements.EmptySpace;
 import elements.Neighborhood;
+import exceptions.InvalidAttributeValueException;
 import players.Player;
 
-public class CrazyBoard extends Board{
+public class CrazyBoard extends NormalBoard implements InterfaceBoard {
 	
-
+	//definindo atributos
+	
 	private int numCrazyCell;
 	
-	
-	
-	//definindo método construtor do tabuleiro
-	
-
 	public int getNumCrazyCell() {
 		return numCrazyCell;
 	}
@@ -26,13 +23,15 @@ public class CrazyBoard extends Board{
 	public void setNumCrazyCell(int numCrazyCell) {
 		this.numCrazyCell = numCrazyCell;
 	}
-
+	
+	//definindo método construtor do tabuleiro maluco
+	
 	public CrazyBoard(int line, int column, int numBomb, int numCrazyCell) {
 		super(line,column,numBomb);
 		this.numCrazyCell = numCrazyCell;
 	}
 	
-	//fazendo com que o metodo startgame de board seja sobescrito
+	//definindo método para inicializar jogo
 	
 	public void startGame() {
 	    square = new Cell[line][column];
@@ -42,7 +41,13 @@ public class CrazyBoard extends Board{
                 square[i][j] = new Neighborhood();
 	        }
 	    }
-	    addBombBoard();
+	    
+	    try {
+			addBombBoard();
+		} catch (InvalidAttributeValueException e) {
+			e.printStackTrace();
+		}
+	    
 	    addCrazyCellBoard();
 	    
 	    for (int i = 0; i < line; i++) {
@@ -53,6 +58,8 @@ public class CrazyBoard extends Board{
 	        }
 	    }
 	}
+	
+	//definindo método para adicionar células malucas
 	
 	public void addCrazyCellBoard() {
 		Random rn = new Random();
@@ -66,7 +73,9 @@ public class CrazyBoard extends Board{
 	        }
 	    }
 	}
-        
+    
+	//definindo método para selecionar as células
+	
 	public void userSelect(int selectedLine, int selectedColumn, int intention, Player player) {
 	    selectedLine--;
 	    selectedColumn--;
@@ -79,33 +88,39 @@ public class CrazyBoard extends Board{
 	    }
 
 	    // adicionar flag
+	    
 	    else if (intention == 1) {
 	        if (!(square[selectedLine][selectedColumn].checkSelected()) && !(square[selectedLine][selectedColumn].checkCrazyCell())) {
 	            square[selectedLine][selectedColumn].setHasFlag(true);
 	            square[selectedLine][selectedColumn].selecting();
 	        } 
+	        
+	   // lógica para fazer a probabilidade da célula maluca alterar seu status de bomba
 	        else if (!(square[selectedLine][selectedColumn].checkSelected()) && (square[selectedLine][selectedColumn].checkCrazyCell())) {
-	            Random random = new Random();
-	            double probabilidadeAlternar = 0.5; 
+	            Random randomCrazyCell = new Random();
+	            double probabilidadeAlternar = 0.6; 
 	            square[selectedLine][selectedColumn].setHasFlag(true);
 	            square[selectedLine][selectedColumn].selecting();
-	            if (random.nextDouble() < probabilidadeAlternar) {
-	            	if(calculateBombs(selectedLine,selectedColumn) == 0){
-	            		square[selectedLine][selectedColumn] =  new EmptySpace();
-	            		square[selectedLine][selectedColumn].setSelected(false);
-	            		square[selectedLine][selectedColumn].setHasFlag(true);
+	            if (randomCrazyCell.nextDouble() <= probabilidadeAlternar) {
+	            	if (square[selectedLine][selectedColumn] instanceof Bomb) {
+		            	if(calculateBombs(selectedLine,selectedColumn) == 0){
+		            		square[selectedLine][selectedColumn] =  new EmptySpace();
+		            		square[selectedLine][selectedColumn].setSelected(false);
+		            		square[selectedLine][selectedColumn].setHasFlag(true);
+		            	}
+		            	else {
+		            		square[selectedLine][selectedColumn] =  new Neighborhood();
+		            		square[selectedLine][selectedColumn].setSelected(false);
+		            		square[selectedLine][selectedColumn].setHasFlag(true);
+		            	}
 	            	}
-	            	else {
-	            		square[selectedLine][selectedColumn] =  new Neighborhood();
-	            		square[selectedLine][selectedColumn].setSelected(false);
-	            		square[selectedLine][selectedColumn].setHasFlag(true);
-	            	}
-	            } 
+	            }
 	        }
 
 	    }
 
 	    // propagação automática
+	    
 	    else if (intention == 0) {
 	        automaticPropagation(selectedLine, selectedColumn);
 	        if ((square[selectedLine][selectedColumn] instanceof Bomb) && (square[selectedLine][selectedColumn].checkSelected()) && (!square[selectedLine][selectedColumn].checkFlag())) {
@@ -115,6 +130,7 @@ public class CrazyBoard extends Board{
 	    }
 
 	    // remover flag
+	    
 	    else if (intention == 2) {
 	        if (square[selectedLine][selectedColumn].checkFlag()) {
 	            square[selectedLine][selectedColumn].setHasFlag(false);
@@ -123,6 +139,7 @@ public class CrazyBoard extends Board{
 	    }
 
 	    // revelar casa
+	    
 	    else {
 	        if (square[selectedLine][selectedColumn] instanceof Bomb) {
 	            System.out.println(this);
@@ -134,6 +151,7 @@ public class CrazyBoard extends Board{
 	    }
 	}
 }
+
 	
 
 

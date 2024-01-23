@@ -7,9 +7,9 @@ import elements.Cell;
 import elements.EmptySpace;
 import elements.Neighborhood;
 import players.Player;
+import exceptions.InvalidAttributeValueException;
 
-
-public class Board {
+public abstract class NormalBoard implements InterfaceBoard {
 	
 	//definindo atributos
 	
@@ -25,6 +25,7 @@ public class Board {
 	public void setSquare (Cell[][] square) {
 		this.square = square;
 	}
+	
 	public int getLine() {
 		return this.line;
 	}
@@ -36,9 +37,10 @@ public class Board {
 	public int getNumBomb() {
 		return this.numBomb;
 	}
-	//definindo método construtor do tabuleiro
 	
-	public Board(int line, int column, int numBomb) {
+	//definindo método construtor do tabuleiro normal
+	
+	public NormalBoard(int line, int column, int numBomb) {
 		this.line = line;
 		this.column = column;
 		this.numBomb = numBomb;
@@ -46,9 +48,15 @@ public class Board {
 	
 	//definindo método para adicionar bombas randomicamente
 	
-	public void addBombBoard() {
+	public void addBombBoard() throws InvalidAttributeValueException {
 	    Random rn = new Random();
-
+	    
+	    //lançando exceção caso o número de bombas seja maior que o número de células
+	    
+	    if (numBomb > (line * column)) {
+	        throw new InvalidAttributeValueException("Número de bombas maior do que o número total de células no tabuleiro.");
+	    }
+	    
 	    for (int z = 0; z < numBomb; z++) {
 	        int lineRandom = rn.nextInt(line);
 	        int columnRandom = rn.nextInt(column);
@@ -69,7 +77,14 @@ public class Board {
                 square[i][j] = new Neighborhood();
 	        }
 	    }
-	    addBombBoard();
+	    
+	    //realizando tratamento da exceção de atributo de valor do número de bombas
+	    
+	    try {
+			addBombBoard();
+		} catch (InvalidAttributeValueException e) {
+			e.printStackTrace();
+		}
 	    
 	    for (int i = 0; i < line; i++) {
 	        for (int j = 0; j < column; j++) {
@@ -80,7 +95,6 @@ public class Board {
 	    }
 	}
 
-	
 	//definindo método para selecionar as células
 	
 	public void userSelect(int selectedLine, int selectedColumn, int intention, Player player) {
@@ -95,6 +109,7 @@ public class Board {
 	    }
 
 	    // adicionar flag
+	    
 	    if (intention == 1) {
 	        if (!square[selectedLine][selectedColumn].checkSelected()) {
 	            square[selectedLine][selectedColumn].setHasFlag(true);
@@ -103,6 +118,7 @@ public class Board {
 	    }
 
 	    // propagação automática
+	    
 	    else if (intention == 0) {
 	        automaticPropagation(selectedLine, selectedColumn);
 	        if ((square[selectedLine][selectedColumn] instanceof Bomb) && (square[selectedLine][selectedColumn].checkSelected()) && (!square[selectedLine][selectedColumn].checkFlag())) {
@@ -112,6 +128,7 @@ public class Board {
 	    }
 
 	    // remover flag
+	    
 	    else if (intention == 2) {
 	        if (square[selectedLine][selectedColumn].checkFlag()) {
 	            square[selectedLine][selectedColumn].setHasFlag(false);
@@ -120,6 +137,7 @@ public class Board {
 	    }
 
 	    // revelar casa
+	    
 	    else {
 	        if (square[selectedLine][selectedColumn] instanceof Bomb) {
 	            System.out.println(this);
@@ -135,7 +153,9 @@ public class Board {
     
 	public void gameOver(Player player) {
 	    try {
+	    	
 	        //Lógica para GAMEOVER
+	    	
 	    	Thread.sleep(500);
 	    	System.out.println("3");
 	        Thread.sleep(1100);
@@ -147,13 +167,21 @@ public class Board {
 	        Thread.sleep(1100);
 	        System.out.println();
 	        System.out.println("[ "+player.getName()+" ]" + " PERDEU!!!");
-	        System.exit(0);
-	    } 
+	        
+	        for (int i = 0; i < line; i++) {
+		        for (int j = 0; j < column; j++) {
+		        	square[i][j].selecting();
+		        }
+	        }
+	        System.out.println(this);
+	    
+	    System.exit(0);
+	    }
 	    catch (InterruptedException e) {
 	        e.printStackTrace();
 	    }
-	}
-    
+	  }
+
     //definindo método para função de propagação automática
 
 	public void automaticPropagation(int lineAuto, int columnAuto) {
