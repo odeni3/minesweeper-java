@@ -3,6 +3,7 @@ package zminesweeper;
 import java.util.Scanner;
 
 import boards.NormalBoard;
+import gui.MainFrame;
 import boards.CrazyBoard;
 import boards.HardBoard;
 import boards.MediumBoard;
@@ -11,9 +12,11 @@ import players.Player;
 
 public class Main {
 
-    public static void main(String[] args) {
+    @SuppressWarnings({ "unused", "resource" })
+	public static void main(String[] args) {
     	
-        @SuppressWarnings("resource")
+    	MainFrame mainFrame = new MainFrame();
+    	
 		Scanner sc = new Scanner(System.in);
 
         System.out.println("Selecione o modo: 0 (Um jogador) -> 1 (Dois jogadores): ");
