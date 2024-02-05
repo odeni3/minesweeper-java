@@ -18,19 +18,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class MainFrame extends JFrame implements ActionListener{
-	
+public class PlayersFrame extends JFrame implements ActionListener {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 	private ImageIcon image = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\logo.png");
-	private JButton recordButton;
-	private JButton infoButton;
-	private JButton playButton;
+	private JButton backButton;
+	private JButton multiplayerButton;
+	private JButton singlePlayerButton;
 	
-	public MainFrame() {
+	public PlayersFrame() {
 		
 		//janela principal
         this.setSize(400, 400);
@@ -58,39 +58,41 @@ public class MainFrame extends JFrame implements ActionListener{
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setOpaque(false);
 
-        playButton = new JButton("Play");
-        playButton.setFont(new Font("Verdana", Font.BOLD, 20));
-        playButton.setBackground(new Color(0, 0, 30));
-        playButton.setForeground(new Color(30, 30, 120));
-        playButton.setBorder(BorderFactory.createLineBorder(new Color(0, 50, 100), 3));
-        playButton.setMaximumSize(new Dimension(230, 100));
-        playButton.setFocusable(false);
-        playButton.addActionListener(this);
+        singlePlayerButton = new JButton("Singleplayer");
+        singlePlayerButton.setFont(new Font("Verdana", Font.BOLD, 20));
+        singlePlayerButton.setBackground(new Color(0, 30, 0));
+        singlePlayerButton.setForeground(new Color(30, 120, 30));
+        singlePlayerButton.setBorder(BorderFactory.createLineBorder(new Color(0, 100, 50), 3));
+        singlePlayerButton.setMaximumSize(new Dimension(230, 100));
+        singlePlayerButton.setFocusable(false);
+        singlePlayerButton.addActionListener(this);
 
-        infoButton = new JButton("Info");
-        infoButton.setFont(new Font("Verdana", Font.BOLD, 20));
-        infoButton.setBackground(new Color(0, 0, 30));
-        infoButton.setForeground(new Color(30, 30, 120));
-        infoButton.setBorder(BorderFactory.createLineBorder(new Color(0, 50, 100), 3));
-        infoButton.setMaximumSize(new Dimension(230, 100));
-        infoButton.setFocusable(false);
+        multiplayerButton = new JButton("Multiplayer");
+        multiplayerButton.setFont(new Font("Verdana", Font.BOLD, 20));
+        multiplayerButton.setBackground(new Color(30, 0, 0));
+        multiplayerButton.setForeground(new Color(120, 30, 30));
+        multiplayerButton.setBorder(BorderFactory.createLineBorder(new Color(100, 50, 0), 3));
+        multiplayerButton.setMaximumSize(new Dimension(230, 100));
+        multiplayerButton.setFocusable(false);
+        multiplayerButton.addActionListener(this);
         
-        recordButton = new JButton("Leaderboard");
-        recordButton.setFont(new Font("Verdana", Font.BOLD, 20));
-        recordButton.setBackground(new Color(0, 0, 30));
-        recordButton.setForeground(new Color(30, 30, 120));
-        recordButton.setBorder(BorderFactory.createLineBorder(new Color(0, 50, 100), 3));
-        recordButton.setMaximumSize(new Dimension(230, 100));
-        recordButton.setFocusable(false);
+        backButton = new JButton("Back");
+        backButton.setFont(new Font("Verdana", Font.BOLD, 20));
+        backButton.setBackground(new Color(0, 0, 30));
+        backButton.setForeground(new Color(30, 30, 120));
+        backButton.setBorder(BorderFactory.createLineBorder(new Color(0, 50, 100), 3));
+        backButton.setMaximumSize(new Dimension(230, 100));
+        backButton.setFocusable(false);
+        backButton.addActionListener(this);
         
         //espaçamento dos botões
         Box box = Box.createVerticalBox();
         box.add(Box.createVerticalGlue());
-        box.add(playButton);
+        box.add(singlePlayerButton);
         box.add(Box.createVerticalStrut(10));
-        box.add(infoButton);
+        box.add(multiplayerButton);
         box.add(Box.createVerticalStrut(10));
-        box.add(recordButton);
+        box.add(backButton);
         box.add(Box.createVerticalStrut(70));
         
         //centralizando botões horizontalmente
@@ -123,19 +125,23 @@ public class MainFrame extends JFrame implements ActionListener{
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
-
+	
+	
+	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==playButton) {
+		if(e.getSource()==singlePlayerButton) {
 			dispose();
-            new PlayersFrame();
+			SingleModesFrame single = new SingleModesFrame();
 		}
-		/*if(e.getSource()==infoButton) {
-			
+		if(e.getSource()==multiplayerButton) {
+			dispose();
+			MultiModesFrame multi = new MultiModesFrame();
 		}
-		if(e.getSource()==recordButton){
-			
-		}*/
+		if(e.getSource()==backButton){
+			dispose();
+            new MainFrame();
+		}
 	}
 
 }
