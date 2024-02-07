@@ -50,27 +50,30 @@ public abstract class NormalBoard implements InterfaceBoard {
 	//definindo método para adicionar bombas randomicamente
 	
 	public void addBombBoard() throws InvalidAttributeValueException {
-		 Random rn = new Random();
+	    Random rn = new Random();
 
-		 // Lançando exceção caso o número de bombas seja maior que o número de células
-		 
-		 if (numBomb > (line * column)) {
-		     throw new InvalidAttributeValueException("Número de bombas maior do que o número total de células no tabuleiro.");
-		 }
+	    //lançando exceção caso o número de bombas seja maior que o número de células
+	    if (numBomb > (line * column)) {
+	        throw new InvalidAttributeValueException("Número de bombas maior do que o número total de células no tabuleiro.");
+	    }
 
-		 // Inicializa o número de bombas marcadas com bandeiras
-		 
-		 numBombsFlagged = 0;
+	    //inicializa o número de bombas marcadas com bandeiras
+	    numBombsFlagged = 0;
+	    
+	    int cont = 0;
 
-		 for (int z = 0; z < numBomb; z++) {
-		     int lineRandom = rn.nextInt(line);
-		     int columnRandom = rn.nextInt(column);
+	    //adicionando bombas até o número desejado ser alcançado
+	    while (cont < numBomb) {
+	        int lineRandom = rn.nextInt(line);
+	        int columnRandom = rn.nextInt(column);
 
-		     if (!(square[lineRandom][columnRandom] instanceof Bomb)) {
-		         square[lineRandom][columnRandom] = new Bomb();
-		     }
-		 }
+	        if (!(square[lineRandom][columnRandom] instanceof Bomb)) {
+	            square[lineRandom][columnRandom] = new Bomb();
+	            cont++;
+	        }
+	    }
 	}
+
 	
 	//definindo método para inicializar jogo
 	
