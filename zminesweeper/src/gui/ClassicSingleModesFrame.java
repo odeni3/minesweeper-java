@@ -155,9 +155,9 @@ public class ClassicSingleModesFrame extends JFrame implements ActionListener{
             case 0:
                 return new EasyBoard(6, 6, 6);
             case 1:
-                return new MediumBoard(12, 12, 20); 
+                return new MediumBoard(12, 12, 15); 
             case 2:
-                return new HardBoard(18, 18, 35); 
+                return new HardBoard(18, 18, 30); 
             default:
                 System.out.println("Opção inválida. Encerrando o jogo.");
                 System.exit(0);
@@ -167,7 +167,8 @@ public class ClassicSingleModesFrame extends JFrame implements ActionListener{
 	
 	//definindo método para criar turno de cada jogador
     
-    private static void playerTurn(NormalBoard tabMain, Scanner sc, Player player) {
+    @SuppressWarnings("unused")
+	private static void playerTurn(NormalBoard tabMain, Scanner sc, Player player) {
         System.out.println("[ Vez de " + player.getName()+" ]");
         System.out.println();
         System.out.println("Digite a linha:");
@@ -198,18 +199,18 @@ public class ClassicSingleModesFrame extends JFrame implements ActionListener{
 		
 		if(e.getSource()==easyButton) {
 			dispose();
-			new MineSweeperGui(selecionarTabuleiro(0));
+			new BoardSoloNormalGui(selecionarTabuleiro(0));
 			
 		}
 		
 		if(e.getSource()==mediumButton) {
 			dispose();
-			new MineSweeperGui(selecionarTabuleiro(1));
+			new BoardSoloNormalGui(selecionarTabuleiro(1));
 		}
 		
 		if(e.getSource()==hardButton){
 			dispose();
-			new MineSweeperGui(selecionarTabuleiro(2));
+			new BoardSoloNormalGui(selecionarTabuleiro(2));
 		}
 		if(e.getSource()==backButton){
 			dispose();

@@ -23,14 +23,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import boards.EasyBoard;
 import boards.NormalBoard;
 import elements.Bomb;
 import elements.EmptySpace;
 import elements.Neighborhood;
 import players.Player;
 
-public class MineSweeperGui extends JFrame implements ActionListener {
+public class BoardSoloNormalGui extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     
@@ -44,7 +43,7 @@ public class MineSweeperGui extends JFrame implements ActionListener {
     private int numBombsFlagged = 0;
     private int totalBombs;
 
-    public MineSweeperGui(NormalBoard board) {
+    public BoardSoloNormalGui(NormalBoard board) {
         this.board = board;
         //exibir diálogo de entrada personalizado
         String playerName = showCustomInputDialog();
@@ -246,6 +245,8 @@ public class MineSweeperGui extends JFrame implements ActionListener {
         infoDialog.setVisible(true);
     }
     
+    //definindo método para atualizar os pontos do jogador
+    
     public void updateOpenedCellsCount(int count) {
         infoLabel1.setText("Score: " + count);
     }
@@ -446,10 +447,6 @@ public class MineSweeperGui extends JFrame implements ActionListener {
             }
         }
         return true; 
-    }
-    
-    public static void main(String[] args) {
-        new MineSweeperGui(new EasyBoard(10, 10, 39));
     }
 
     @Override
