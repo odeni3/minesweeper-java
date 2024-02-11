@@ -153,11 +153,11 @@ public class ClassicSingleModesFrame extends JFrame implements ActionListener{
 	private static NormalBoard selecionarTabuleiro(int escolha) {
         switch (escolha) {
             case 0:
-                return new EasyBoard(6, 6, 10);
+                return new EasyBoard(6, 6, 6);
             case 1:
                 return new MediumBoard(12, 12, 20); 
             case 2:
-                return new HardBoard(18, 18, 40); 
+                return new HardBoard(18, 18, 35); 
             default:
                 System.out.println("Opção inválida. Encerrando o jogo.");
                 System.exit(0);
@@ -198,56 +198,18 @@ public class ClassicSingleModesFrame extends JFrame implements ActionListener{
 		
 		if(e.getSource()==easyButton) {
 			dispose();
-			NormalBoard tabMain = selecionarTabuleiro(0);
-			System.out.println("Digite o nome do jogador:");
-            String namePlayer1 = sc.nextLine();
-            Player player1 = new Player(namePlayer1.toUpperCase(), 0);
-
-            tabMain.startGame();
-            System.out.println();
-            System.out.println(tabMain);
-
-            while (true) {
-                playerTurn(tabMain, sc, player1);
-                System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
-                System.out.println();
-            }
+			new MineSweeperGui(selecionarTabuleiro(0));
+			
 		}
 		
 		if(e.getSource()==mediumButton) {
 			dispose();
-			NormalBoard tabMain = selecionarTabuleiro(1);
-			System.out.println("Digite o nome do jogador:");
-            String namePlayer1 = sc.nextLine();
-            Player player1 = new Player(namePlayer1.toUpperCase(), 0);
-
-            tabMain.startGame();
-            System.out.println();
-            System.out.println(tabMain);
-
-            while (true) {
-                playerTurn(tabMain, sc, player1);
-                System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
-                System.out.println();
-            }
+			new MineSweeperGui(selecionarTabuleiro(1));
 		}
 		
 		if(e.getSource()==hardButton){
 			dispose();
-			NormalBoard tabMain = selecionarTabuleiro(2);
-			System.out.println("Digite o nome do jogador:");
-            String namePlayer1 = sc.nextLine();
-            Player player1 = new Player(namePlayer1.toUpperCase(), 0);
-
-            tabMain.startGame();
-            System.out.println();
-            System.out.println(tabMain);
-
-            while (true) {
-                playerTurn(tabMain, sc, player1);
-                System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
-                System.out.println();
-            }
+			new MineSweeperGui(selecionarTabuleiro(2));
 		}
 		if(e.getSource()==backButton){
 			dispose();
