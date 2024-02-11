@@ -7,8 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -76,6 +74,7 @@ public class MainFrame extends JFrame implements ActionListener{
         infoButton.setBorder(BorderFactory.createLineBorder(new Color(0, 50, 100), 3));
         infoButton.setMaximumSize(new Dimension(230, 100));
         infoButton.setFocusable(false);
+        infoButton.addActionListener(this);
         
         recordButton = new JButton("Leaderboard");
         recordButton.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -121,23 +120,45 @@ public class MainFrame extends JFrame implements ActionListener{
         // Adicionando borda ao redor de toda a janela
         Border frameBorder = BorderFactory.createLineBorder(new Color(0, 50, 100), 4);
         this.getRootPane().setBorder(frameBorder);
+        
+        playButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                playButton.setBackground(new Color(0, 0, 70));
+                playButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                playButton.setBackground(new Color(0, 0, 30));
+                playButton.setForeground(new Color(30, 30, 120));
+            }
+        });
+
+        infoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                infoButton.setBackground(new Color(0, 0, 70));
+                infoButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                infoButton.setBackground(new Color(0, 0, 30));
+                infoButton.setForeground(new Color(30, 30, 120));
+            }
+        });
+        
+        recordButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            	recordButton.setBackground(new Color(0, 0, 70));
+            	recordButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	recordButton.setBackground(new Color(0, 0, 30));
+            	recordButton.setForeground(new Color(30, 30, 120));
+            }
+        });
 
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-    }
-	
-	public static void main(String[] args) {
-        
-		//criando uma instância de LoadingGui
-        LoadingGui loadingGui = new LoadingGui();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                loadingGui.dispose();
-                new MainFrame();
-            }
-        }, 4000);
     }
 
 	@Override
@@ -146,12 +167,13 @@ public class MainFrame extends JFrame implements ActionListener{
 			dispose();
             new PlayersFrame();
 		}
-		/*if(e.getSource()==infoButton) {
-			
+		if(e.getSource()==infoButton) {
+			dispose();
+			new InfoGui();
 		}
 		if(e.getSource()==recordButton){
 			
-		}*/
+		}
 	}
 
 }

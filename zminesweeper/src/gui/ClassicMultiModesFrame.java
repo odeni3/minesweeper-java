@@ -142,7 +142,55 @@ public class ClassicMultiModesFrame extends JFrame implements ActionListener{
         // Adicionando borda ao redor de toda a janela
         Border frameBorder = BorderFactory.createLineBorder(new Color(0, 50, 100), 4);
         this.getRootPane().setBorder(frameBorder);
+        
+        easyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            	easyButton.setBackground(new Color(0, 70, 0));
+                easyButton.setForeground(Color.WHITE);
+            }
 
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	easyButton.setBackground(new Color(0, 30, 0));
+            	easyButton.setForeground(new Color(30, 120, 30));
+            }
+        });
+        
+        mediumButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mediumButton.setBackground(new Color(70, 70, 0));
+                mediumButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                mediumButton.setBackground(new Color(30, 30, 0));
+                mediumButton.setForeground(new Color(120, 120, 30));
+            }
+        });
+
+        hardButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            	hardButton.setBackground(new Color(70, 0, 0));
+            	hardButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	hardButton.setBackground(new Color(30, 0, 0));
+            	hardButton.setForeground(new Color(120, 30, 30));
+            }
+        });
+
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backButton.setBackground(new Color(0, 0, 70));
+                backButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backButton.setBackground(new Color(0, 0, 30));
+                backButton.setForeground(new Color(30, 30, 120));
+            }
+        });
+        
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }

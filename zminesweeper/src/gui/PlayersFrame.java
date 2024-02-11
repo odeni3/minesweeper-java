@@ -121,6 +121,42 @@ public class PlayersFrame extends JFrame implements ActionListener {
         // Adicionando borda ao redor de toda a janela
         Border frameBorder = BorderFactory.createLineBorder(new Color(0, 50, 100), 4);
         this.getRootPane().setBorder(frameBorder);
+        
+        singlePlayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                singlePlayerButton.setBackground(new Color(0, 70, 0));
+                singlePlayerButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                singlePlayerButton.setBackground(new Color(0, 30, 0));
+                singlePlayerButton.setForeground(new Color(30, 120, 30));
+            }
+        });
+
+        multiplayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                multiplayerButton.setBackground(new Color(70, 0, 0));
+                multiplayerButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                multiplayerButton.setBackground(new Color(30, 0, 0));
+                multiplayerButton.setForeground(new Color(120, 30, 30));
+            }
+        });
+
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backButton.setBackground(new Color(0, 0, 70));
+                backButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backButton.setBackground(new Color(0, 0, 30));
+                backButton.setForeground(new Color(30, 30, 120));
+            }
+        });
 
         this.setVisible(true);
         this.setLocationRelativeTo(null);

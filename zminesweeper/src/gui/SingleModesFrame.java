@@ -127,7 +127,43 @@ public class SingleModesFrame extends JFrame implements ActionListener {
         // Adicionando borda ao redor de toda a janela
         Border frameBorder = BorderFactory.createLineBorder(new Color(0, 50, 100), 4);
         this.getRootPane().setBorder(frameBorder);
+        
+        classicButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                classicButton.setBackground(new Color(0, 70, 0));
+                classicButton.setForeground(Color.WHITE);
+            }
 
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	classicButton.setBackground(new Color(0, 30, 0));
+            	classicButton.setForeground(new Color(30, 120, 30));
+            }
+        });
+
+        crazyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                crazyButton.setBackground(new Color(70, 0, 0));
+                crazyButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	crazyButton.setBackground(new Color(30, 0, 0));
+            	crazyButton.setForeground(new Color(120, 30, 30));
+            }
+        });
+
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backButton.setBackground(new Color(0, 0, 70));
+                backButton.setForeground(Color.WHITE);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backButton.setBackground(new Color(0, 0, 30));
+                backButton.setForeground(new Color(30, 30, 120));
+            }
+        });
+        
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
