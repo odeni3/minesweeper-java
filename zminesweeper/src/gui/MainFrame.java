@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -122,6 +124,20 @@ public class MainFrame extends JFrame implements ActionListener{
 
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+    }
+	
+	public static void main(String[] args) {
+        
+		//criando uma instância de LoadingGui
+        LoadingGui loadingGui = new LoadingGui();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                loadingGui.dispose();
+                new MainFrame();
+            }
+        }, 4000);
     }
 
 	@Override
