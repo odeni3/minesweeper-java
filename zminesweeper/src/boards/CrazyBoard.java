@@ -63,13 +63,16 @@ public class CrazyBoard extends NormalBoard implements InterfaceBoard {
 	
 	public void addCrazyCellBoard() {
 		Random rn = new Random();
+		
+		int cont = 0;
 
-	    for (int z = 0; z < numCrazyCell; z++) {
+	    while(cont < numCrazyCell) {
 	        int lineRandom = rn.nextInt(getLine());
 	        int columnRandom = rn.nextInt(getColumn());
 
 	        if (!(getSquare()[lineRandom][columnRandom]).checkCrazyCell()) {
 	        	getSquare()[lineRandom][columnRandom].setCrazyCell(true);
+	        	cont++;
 	        }
 	    }
 	}
@@ -112,34 +115,8 @@ public class CrazyBoard extends NormalBoard implements InterfaceBoard {
 	   // lógica para fazer a probabilidade da célula maluca alterar seu status de bomba
 	        
 	        else if (!(square[selectedLine][selectedColumn].checkSelected()) && (square[selectedLine][selectedColumn].checkCrazyCell())) {
-	            Random randomCrazyCell = new Random();
-	            double probabilidadeAlternar = 0.6; 
-	            square[selectedLine][selectedColumn].setHasFlag(true);
-	            square[selectedLine][selectedColumn].selecting();
-	            if (randomCrazyCell.nextDouble() <= probabilidadeAlternar) {
-	            	if (square[selectedLine][selectedColumn] instanceof Bomb) {
-	            		numBombsFlagged++;
-	            		if (numBombsFlagged == numBomb) {
-	    	            	System.out.println(this);
-	    	            	System.out.println("[ "+player.getName()+" ]" + " VENCEU!!!"+ " | SCORE: " + (player.getScore()+1));
-	    	            	System.exit(0);
-	    	            }
-	            		else {
-			            	if(calculateBombs(selectedLine,selectedColumn) == 0){
-			            		square[selectedLine][selectedColumn] =  new EmptySpace();
-			            		square[selectedLine][selectedColumn].setSelected(false);
-			            		square[selectedLine][selectedColumn].setHasFlag(true);
-			            	}
-			            	else {
-			            		square[selectedLine][selectedColumn] =  new Neighborhood();
-			            		square[selectedLine][selectedColumn].setSelected(false);
-			            		square[selectedLine][selectedColumn].setHasFlag(true);
-			            	}
-	            		}
-	            	}
-	            }
+	        	handleCrazyCell(selectedLine, selectedColumn, player);
 	        }
-
 	    }
 
 	    // propagação automática
@@ -170,6 +147,34 @@ public class CrazyBoard extends NormalBoard implements InterfaceBoard {
 	        } 
 	        else {
 	            square[selectedLine][selectedColumn].selecting();
+	        }
+	    }
+	}
+	
+	public void handleCrazyCell(int selectedLine, int selectedColumn, Player player) {
+	    Random randomCrazyCell = new Random();
+	    double probabilidadeAlternar = 0.5; 
+	    square[selectedLine][selectedColumn].setHasFlag(true);
+	    square[selectedLine][selectedColumn].selecting();
+	    
+	    if (randomCrazyCell.nextDouble() <= probabilidadeAlternar) {
+	        if (square[selectedLine][selectedColumn] instanceof Bomb) {
+	            numBombsFlagged++;
+	            /*if (numBombsFlagged == numBomb) {
+	                System.out.println(this);
+	                System.out.println("[ " + player.getName() + " ]" + " VENCEU!!!" + " | SCORE: " + (player.getScore() + 1));
+	                System.exit(0);
+	            } 
+	            else {*/
+	                if (calculateBombs(selectedLine, selectedColumn) == 0) {
+	                    square[selectedLine][selectedColumn] = new EmptySpace();
+	                } 
+	                else {
+	                    square[selectedLine][selectedColumn] = new Neighborhood();
+	                }
+	                square[selectedLine][selectedColumn].setSelected(false);
+	                square[selectedLine][selectedColumn].setHasFlag(true);
+	            //}
 	        }
 	    }
 	}

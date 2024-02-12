@@ -201,11 +201,11 @@ public class ClassicSingleModesFrame extends JFrame implements ActionListener{
 	private static NormalBoard selecionarTabuleiro(int escolha) {
         switch (escolha) {
             case 0:
-                return new EasyBoard(6, 6, 6);
+                return new EasyBoard(6, 6, 8);
             case 1:
-                return new MediumBoard(12, 12, 15); 
+                return new MediumBoard(12, 12, 20); 
             case 2:
-                return new HardBoard(18, 18, 30); 
+                return new HardBoard(18, 18, 40); 
             default:
                 System.out.println("Opção inválida. Encerrando o jogo.");
                 System.exit(0);
