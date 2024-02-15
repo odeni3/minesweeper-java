@@ -11,7 +11,7 @@ public class Player {
     
     public Player(String nome, int score) {
         this.name = nome;
-        this.score = 0;
+        this.score = score;
     }
 
     //definindo getters e setters

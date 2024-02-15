@@ -170,7 +170,8 @@ public class MultiModesFrame extends JFrame implements ActionListener {
 		
 	//definindo método para criar turno de cada jogador
     
-    private static void playerTurn(NormalBoard tabMain, Scanner sc, Player player) {
+    @SuppressWarnings("unused")
+	private static void playerTurn(NormalBoard tabMain, Scanner sc, Player player) {
         System.out.println("[ Vez de " + player.getName()+" ]");
         System.out.println();
         System.out.println("Digite a linha:");
@@ -204,30 +205,7 @@ public class MultiModesFrame extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==crazyButton) {
 			dispose();
-			System.out.println("Digite o nome do primeiro jogador:");
-        	String namePlayer1 = sc.nextLine();
-        	System.out.println("Digite o nome do segundo jogador:");
-        	String namePlayer2 = sc.nextLine();
-        	System.out.println();
-
-            Player player1 = new Player(namePlayer1.toUpperCase(), 0);
-            Player player2 = new Player(namePlayer2.toUpperCase(), 0);
-
-            CrazyBoard tabMain = new CrazyBoard(12,12,20,49);
-            tabMain.startGame();
-            System.out.println();
-            System.out.println(tabMain);
-           
-            while (true) {
-                playerTurn(tabMain, sc, player1);
-                System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
-                System.out.println("| " + player2.getName() + " | SCORE: " + player2.getScore());
-                System.out.println();
-                playerTurn(tabMain, sc, player2);
-                System.out.println("| " + player1.getName() + " | SCORE: " + player1.getScore());
-                System.out.println("| " + player2.getName() + " | SCORE: " + player2.getScore());
-                System.out.println();
-            }	
+			new BoardMultiCrazyGui(new CrazyBoard(12,12,20,60));	
 		}
 		
 		if(e.getSource()==backButton){

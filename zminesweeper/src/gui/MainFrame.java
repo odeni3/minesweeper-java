@@ -5,18 +5,26 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
+
+import leaderboard.RecordManager;
+import players.Player;
 
 public class MainFrame extends JFrame implements ActionListener{
 	
@@ -29,6 +37,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private JButton recordButton;
 	private JButton infoButton;
 	private JButton playButton;
+	private RecordManager recordManager;
 	
 	public MainFrame() {
 		
@@ -83,6 +92,7 @@ public class MainFrame extends JFrame implements ActionListener{
         recordButton.setBorder(BorderFactory.createLineBorder(new Color(0, 50, 100), 3));
         recordButton.setMaximumSize(new Dimension(230, 100));
         recordButton.setFocusable(false);
+        recordButton.addActionListener(this);
         
         //espaçamento dos botões
         Box box = Box.createVerticalBox();
@@ -118,7 +128,7 @@ public class MainFrame extends JFrame implements ActionListener{
         this.add(bottomPanel, BorderLayout.SOUTH);
 
         // Adicionando borda ao redor de toda a janela
-        Border frameBorder = BorderFactory.createLineBorder(new Color(0, 50, 100), 4);
+        Border frameBorder = BorderFactory.createLineBorder(new Color(0, 50, 200), 4);
         this.getRootPane().setBorder(frameBorder);
         
         playButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,10 +166,55 @@ public class MainFrame extends JFrame implements ActionListener{
             	recordButton.setForeground(new Color(30, 30, 120));
             }
         });
+        
+        recordManager = RecordManager.getInstance();
 
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
+	
+	//método para mostrar o recorde
+	private void showLeaderboard() {
+	    //obtendo a lista de jogadores ordenada pelo score
+	    List<Player> players = recordManager.getSortedPlayers();
+
+	    //criando um JDialog personalizado para o leaderboard
+	    JDialog leaderboardDialog = new JDialog(this, "Leaderboard", false);
+	    leaderboardDialog.setSize(250, 390);
+	    leaderboardDialog.setResizable(false);
+	    leaderboardDialog.setUndecorated(true);
+	    leaderboardDialog.getRootPane().setBorder(BorderFactory.createLineBorder(new Color(0, 75, 250), 4));
+	    leaderboardDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	    leaderboardDialog.setLayout(null);
+
+	    //JTextArea para exibir o leaderboard
+	    JTextArea leaderboardTextArea = new JTextArea();
+	    leaderboardTextArea.setFont(new Font("Verdana", Font.BOLD, 15));
+	    leaderboardTextArea.setForeground(new Color(250, 250, 250));
+	    leaderboardTextArea.setBackground(new Color(0, 0, 10));
+	    leaderboardTextArea.setEditable(false);
+	    leaderboardTextArea.setMargin(new Insets(5, 10, 5, 5));
+
+	    //adicionando os jogadores ao leaderboardTextArea
+	    leaderboardTextArea.append("Leaderboard:\n\n");
+	    for (int i = 0; i < players.size(); i++) {
+	        leaderboardTextArea.append((i + 1) + ". " + players.get(i).getName() + ": " + players.get(i).getScore() + "\n");
+	    }
+
+	    //criando um JScrollPane para o leaderboardTextArea
+	    JScrollPane scrollPane = new JScrollPane(leaderboardTextArea);
+	    scrollPane.setBounds(-5, -5, 400, 400);
+	    leaderboardDialog.add(scrollPane);
+
+	    int xPosition = this.getLocation().x - 242;
+
+	    leaderboardDialog.setLocation(xPosition, this.getLocation().y);
+	    leaderboardDialog.setVisible(true);
+	}
+
+
+
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -172,7 +227,9 @@ public class MainFrame extends JFrame implements ActionListener{
 			new InfoGui();
 		}
 		if(e.getSource()==recordButton){
-			
+			recordManager.getPlayers().clear();
+	        recordManager.loadRecords("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\leaderboard\\leaderboardMinesweeper.txt");
+	        showLeaderboard();
 		}
 	}
 

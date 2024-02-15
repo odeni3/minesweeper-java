@@ -27,6 +27,7 @@ import boards.NormalBoard;
 import elements.Bomb;
 import elements.EmptySpace;
 import elements.Neighborhood;
+import leaderboard.RecordManager;
 import players.Player;
 
 public class BoardSoloNormalGui extends JFrame implements ActionListener {
@@ -40,17 +41,26 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
     private JButton[][] button;
     private NormalBoard board;
     private JLabel infoLabel1;
+    private RecordManager recordManager;
     private int numBombsFlagged = 0;
     private int totalBombs;
 
     public BoardSoloNormalGui(NormalBoard board) {
         this.board = board;
+        
         //exibir diálogo de entrada personalizado
         String playerName = showCustomInputDialog();
         if (playerName == null || playerName.isEmpty()) {
             playerName = "";
         }
-
+        
+        //inicializando jogador
+        player1 = new Player(playerName,0);
+        
+        //inicializando recorde
+        recordManager = RecordManager.getInstance();
+        recordManager.addPlayer(player1);
+        
         this.setSize(500, 500);
         this.setResizable(false);
         this.setTitle("zminesweeper");
@@ -129,6 +139,7 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
                             board.getSquare()[clickedRow][clickedCol].selecting();
                             updateButtons();
                         }
+                        board.calculateScore(player1);
                     }
                 });
 
@@ -176,6 +187,7 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
                                 button[row][col].setLayout(new BorderLayout());
                             }
                         }
+                        board.calculateScore(player1);
                     }
 
                     @Override
@@ -221,7 +233,6 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
         
 
         //label para exibir o nome da pessoa e o número de casas abertas
-        player1 = new Player(playerName,0);
         JLabel infoLabel = new JLabel("Player: " + player1.getName());
         infoLabel1 = new JLabel("Score: "+ player1.getScore());
         infoLabel.setForeground(new Color(250, 250, 250));
@@ -365,6 +376,8 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
                     }
                 }
             }
+            
+            recordManager.saveRecords("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\leaderboard\\leaderboardMinesweeper.txt");
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -416,6 +429,8 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
                     }
                 }
             }
+            
+            recordManager.saveRecords("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\leaderboard\\leaderboardMinesweeper.txt");
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
