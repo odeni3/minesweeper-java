@@ -32,9 +32,9 @@ public class BoardMultiCrazyGui extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    private ImageIcon image = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\logo.png");
-    private ImageIcon bombImage = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\bomb.png");
-    private ImageIcon flagImage = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\flag.png");
+    private ImageIcon image = new ImageIcon("src\\images\\logo.png");
+    private ImageIcon bombImage = new ImageIcon("src\\images\\bomb.png");
+    private ImageIcon flagImage = new ImageIcon("src\\images\\flag.png");
     private JButton[][] button;
     private CrazyBoard board;
     private JLabel infoLabel1;

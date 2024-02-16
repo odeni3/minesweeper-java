@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 public class LoadingGui extends JFrame {
 	
     private static final long serialVersionUID = 1L;
-    private ImageIcon imagee = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\ziggs.png");
-    private ImageIcon image = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\logo.png");
+    private ImageIcon imagee = new ImageIcon("src/images/ziggs.png");
+    private ImageIcon image = new ImageIcon("src/images/logo.png");
     
     public LoadingGui() {
         this.setSize(390, 565);

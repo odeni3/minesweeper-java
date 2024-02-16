@@ -1,8 +1,6 @@
-eunaosei,0
-dan,0
-blALVA,0
-kiko,1
-danielguilhermkar,1
-markgu,190
-painho,46
-MIGUE,3
+mark,66
+bilivi,69
+pombo,93
+kayky,123
+omiggy,94
+odeni,287

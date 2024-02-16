@@ -33,7 +33,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private ImageIcon image = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\logo.png");
+	private ImageIcon image = new ImageIcon("src/images/logo.png");
 	private JButton recordButton;
 	private JButton infoButton;
 	private JButton playButton;
@@ -228,7 +228,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		}
 		if(e.getSource()==recordButton){
 			recordManager.getPlayers().clear();
-	        recordManager.loadRecords("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\leaderboard\\leaderboardMinesweeper.txt");
+	        recordManager.loadRecords("src/leaderboard/leaderboardMinesweeper.txt");
 	        showLeaderboard();
 		}
 	}

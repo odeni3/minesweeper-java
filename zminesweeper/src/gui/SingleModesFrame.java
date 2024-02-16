@@ -30,7 +30,7 @@ public class SingleModesFrame extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private ImageIcon image = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\logo.png");
+	private ImageIcon image = new ImageIcon("src/images/logo.png");
 	private JButton backButton;
 	private JButton crazyButton;
 	private JButton classicButton;

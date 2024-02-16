@@ -17,8 +17,8 @@ import javax.swing.JLabel;
 public class InfoGui extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    private ImageIcon infoImage = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\info.png");
-    private ImageIcon appIcon = new ImageIcon("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\images\\logo.png");
+    private ImageIcon infoImage = new ImageIcon("src/images/info.png");
+    private ImageIcon appIcon = new ImageIcon("src/images/logo.png");
     private JButton backButton;
 
     public InfoGui() {

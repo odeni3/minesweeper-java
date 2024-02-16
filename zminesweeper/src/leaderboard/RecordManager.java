@@ -39,7 +39,7 @@ public class RecordManager implements Serializable {
             for (Player player : players) {
                 writer.println(player.getName() + "," + player.getScore());
             }
-            System.out.println("Records saved successfully.");
+            //System.out.println("Records saved successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
