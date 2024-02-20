@@ -4,4 +4,3 @@ pombo,93
 kayky,123
 omiggy,94
 odeni,287
-bruno,2
