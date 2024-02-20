@@ -18,11 +18,15 @@ public abstract class Cell {
 	public void setCrazyCell(boolean crazyCell) {
 		this.crazyCell = crazyCell;
 	}
-
+	
+	//método para checar se o ponto já foi contado
+	
 	public boolean getCheckedToScore() {
 		return checkedToScore;
 	}
-
+	
+	//método para checar marcar a célula contando o ponto
+	
     public void setCheckedToScore(boolean checkedtoScore) {
         this.checkedToScore = true;
     }

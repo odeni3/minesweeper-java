@@ -10,6 +10,8 @@ import players.Player;
 public class RecordManager implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    
+    //definindo atributos
     private static RecordManager instance;
     private List<Player> players;
 
@@ -24,7 +26,8 @@ public class RecordManager implements Serializable {
         }
         return instance;
     }
-
+    
+    //método para adicionar um player
     public void addPlayer(Player player) {
         players.add(player);
     }

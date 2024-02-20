@@ -544,7 +544,7 @@ public class BoardMultiCrazyGui extends JFrame implements ActionListener {
         currentPlayerLabel.setText("VEZ DE: " + currentPlayer.getName());
     }
     
-    //método que serve como um console.log para verificar informações do backend
+    //método que serve como um console.log para verificar as informações das células do backend
     public void printBoardState() {
         System.out.println("Current board:");
         for (int i = 0; i < board.getLine(); i++) {
@@ -566,6 +566,7 @@ public class BoardMultiCrazyGui extends JFrame implements ActionListener {
         System.out.println(numBombsFlagged);
     }
     
+  //método que serve como um console.log para verificar informações da contagem de bomba do backend
     public int countBombs() {
         int bombCount = 0;
         for (int i = 0; i < board.getLine(); i++) {
