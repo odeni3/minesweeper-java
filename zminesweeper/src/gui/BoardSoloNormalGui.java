@@ -377,7 +377,7 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
                 }
             }
             
-            recordManager.saveRecords("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\leaderboard\\leaderboardMinesweeper.txt");
+            recordManager.saveRecords("src/leaderboard/leaderboardMinesweeper.txt");
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -430,7 +430,7 @@ public class BoardSoloNormalGui extends JFrame implements ActionListener {
                 }
             }
             
-            recordManager.saveRecords("C:\\Users\\User\\git\\repository\\zminesweeper\\src\\leaderboard\\leaderboardMinesweeper.txt");
+            recordManager.saveRecords("src/leaderboard/leaderboardMinesweeper.txt");
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {

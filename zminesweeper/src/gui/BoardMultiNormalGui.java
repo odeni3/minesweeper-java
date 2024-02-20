@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import boards.EasyBoard;
 import boards.NormalBoard;
 import elements.Bomb;
 import elements.EmptySpace;
@@ -497,10 +496,6 @@ public class BoardMultiNormalGui extends JFrame implements ActionListener {
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
         currentPlayerLabel.setText("VEZ DE: " + currentPlayer.getName());
-    }
-
-    public static void main(String[] args) {
-        new BoardMultiNormalGui(new EasyBoard(5, 5, 2));
     }
 
     @Override

@@ -22,8 +22,4 @@ public class LoadingGui extends JFrame {
         this.setUndecorated(true);
         this.setVisible(true);
     }
-    
-    public static void main (String[] args) {
-    	new LoadingGui();
-    }
 }
