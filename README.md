@@ -25,5 +25,5 @@ Welcome to MineSweeper, a Java implementation of the classic puzzle video game. 
 
 ## Preview
 
-![MineSweeper Preview](zminesweeper/src/images/info.png)
+![MineSweeper Preview](zminesweeper/src/images/infoReadme.png)
 
